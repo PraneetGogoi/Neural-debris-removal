@@ -820,6 +820,24 @@ footer{border-top:1px solid var(--rule);padding-block:clamp(3rem,6vw,4.5rem)}
       <div class="cell a"><div class="l">error, poison box</div><div class="amt">÷10</div><div class="d">A_FACTOR = 10. Exactly why demote-to-ε outperforms delete.</div></div>
     </div>
 
+    <div class="ch-head rv d1" style="margin-top: 3.5rem;">
+      <span class="ch-num">VI-A.</span>
+      <h3 class="ch-title" style="font-size: 1.4rem;">Frequency-Domain Spectral Probing (2D Fourier Discrimination)</h3>
+    </div>
+    <p class="prose rv d2">
+      While convolutional neural networks inspect spatial patterns, spatial backdoor triggers inherently inject localized high-frequency grid artifacts or sharp boundary discontinuities. To isolate triggers orthogonally before neural evaluation, our diagnostic program applies a 2D Discrete Fourier Transform ($\text{2D-DFT}$) across candidate bounding box crops. By computing the ratio of radial high-frequency spectral energy $\mathcal{E}_{\text{high}}$ (Eq. 5), we cleanly separate smooth astronomical Airy disk point spread functions from artificial Trojan patches:
+    </p>
+    <div class="eqn rv d2"><div class="eqn-body" id="eq5"></div><span class="eqn-no">(5)</span></div>
+
+    <div class="ch-head rv d1" style="margin-top: 3.5rem;">
+      <span class="ch-num">VI-B.</span>
+      <h3 class="ch-title" style="font-size: 1.4rem;">Epistemic Uncertainty Quantification via Monte Carlo Dropout</h3>
+    </div>
+    <p class="prose rv d2">
+      Rather than relying strictly on deterministic point-estimates for confidence demotion, our architecture extends `TinyCNN` with spatial dropout layers during inference ($\text{MCDropoutTinyCNN}$). By executing $T=25$ stochastic forward passes per candidate crop, we calculate predictive epistemic variance $\sigma^2_{\text{epistemic}}$ alongside mean confidence $\mu_{\text{conf}}$ (Eq. 6). Legitimate faint astronomical streaks exhibit stable confidence across dropout samples, whereas out-of-distribution Trojan activations induce severe epistemic divergence:
+    </p>
+    <div class="eqn rv d2"><div class="eqn-body" id="eq6"></div><span class="eqn-no">(6)</span></div>
+
     <div class="footnote-final rv d2">The metric is, in effect, quietly asking to keep boxes and simply quiet the suspicious ones — which is precisely what the remap program in Chapter IV does.</div>
   </div>
 </section>
@@ -1051,7 +1069,9 @@ document.querySelectorAll(".rv").forEach(el=>{if(!el.classList.contains("in"))io
       eq1:"\\text{signal}_{\\text{surv}} = 1 - \\dfrac{\\bar{c}_{\\text{ensemble}}}{\\bar{c}_{\\text{base}}}",
       eq2:"p_{\\text{poison}} = 0.75\\,\\text{signal}_{\\text{surv}} + 0.20\\,\\text{signal}_{\\text{app}} + 0.05\\,\\text{signal}_{\\text{geo}}",
       eq3:"\\text{remap}(s,p)=\\begin{cases}0 & s<\\text{MIN\\_KEEP}\\\\[2pt]\\varepsilon & p\\ge P_{HI}\\\\[2pt]s\\ \\text{(or }C_{\\max}\\text{ if BOOST)} & p\\le P_{LO}\\\\[6pt]\\max\\!\\Big(\\varepsilon,\\; s\\big(1-\\frac{p-P_{LO}}{P_{HI}-P_{LO}}\\big)\\Big) & \\text{otherwise}\\end{cases}",
-      eq4:"\\text{cost}(b)=\\begin{cases}\\dfrac{1}{10}\\,\\lvert c_{\\text{pred}}-c_{\\text{gt}}\\rvert & b\\in\\text{poison}\\\\[6pt]\\lvert c_{\\text{pred}}-c_{\\text{gt}}\\rvert & b\\in\\text{clean}\\end{cases}"
+      eq4:"\\text{cost}(b)=\\begin{cases}\\dfrac{1}{10}\\,\\lvert c_{\\text{pred}}-c_{\\text{gt}}\\rvert & b\\in\\text{poison}\\\\[6pt]\\lvert c_{\\text{pred}}-c_{\\text{gt}}\\rvert & b\\in\\text{clean}\\end{cases}",
+      eq5:"\\mathcal{E}_{\\text{high}} = \\dfrac{\\sum_{k \\in \\Omega_{\\text{high}}} \\lvert F(k_x, k_y) \\rvert^2}{\\sum_{k} \\lvert F(k_x, k_y) \\rvert^2 + \\delta}",
+      eq6:"\\sigma^2_{\\text{epistemic}} = \\dfrac{1}{T} \\sum_{t=1}^{T} \\left( \\hat{p}_t(y|x, \\hat{\\omega}_t) - \\bar{p} \\right)^2"
     };
     Object.keys(eqs).forEach(id=>{
       const el=document.getElementById(id);
