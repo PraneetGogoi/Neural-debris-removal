@@ -1,0 +1,11 @@
+# macOS AppleDouble and metadata files
+._*
+.DS_Store
+
+# IDE and Editor files
+.vscode/
+*.swp
+
+# Large datasets and temporary training outputs
+neural-debris-removal-in-streak-detection-models/
+working/
