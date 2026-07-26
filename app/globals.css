@@ -64,7 +64,7 @@ section[id], .cover { scroll-margin-top: 4rem; }
 #scrollProgress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--poison), var(--survive)); z-index: 1001; width: 0%; transition: width .08s linear; }
 
 /* ================= topbar floating glass pill ================= */
-.topbar { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; align-items: center; gap: 1.4rem; width: min(94%, 1240px); padding: .6rem 1.2rem; background: rgba(10, 11, 14, 0.82); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(228, 228, 223, 0.10); border-radius: 999px; box-shadow: 0 14px 38px -12px rgba(0,0,0,.65); transition: all .35s var(--ease); }
+.topbar { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; align-items: center; gap: 1.4rem; width: min(94%, 1240px); padding: .6rem 1.2rem; background: var(--bg); border: 1px solid rgba(228, 228, 223, 0.10); border-radius: 999px; box-shadow: 0 14px 38px -12px rgba(0,0,0,.65); transition: all .35s var(--ease); }
 .topbar:hover { border-color: rgba(228, 228, 223, 0.18); }
 .tb-mark { display: flex; align-items: center; gap: .55rem; font-family: var(--f-mono); font-size: .74rem; letter-spacing: .04em; color: var(--text-dim); white-space: nowrap; }
 .tb-mark b { color: var(--text); font-weight: 700; }
@@ -132,6 +132,18 @@ section[id], .cover { scroll-margin-top: 4rem; }
 figcaption { font-family: var(--f-mono); font-size: .72rem; color: var(--text-faint); line-height: 1.6; margin-top: .8rem; max-width: var(--measure); margin-inline: auto; padding-left: 1.4rem; position: relative; }
 figcaption b { color: var(--text-dim); font-weight: 700; }
 figcaption::before { content: attr(data-fig); position: absolute; left: 0; top: 0; color: var(--text-dim); }
+
+/* ================= flowchart (pipeline diagram) ================= */
+.flowwrap { overflow-x: auto; padding-bottom: 1rem; margin-bottom: 0.5rem; }
+.flowchart { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; min-width: max-content; }
+.fnode { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.fnode .fi { font-family: var(--f-mono); font-size: 0.7rem; color: var(--text-faint); padding: 0.2rem 0.6rem; border: 1px solid var(--rule); border-radius: 99px; background: var(--panel-2); }
+.fnode .ft { font-family: var(--f-mono); font-size: 0.65rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-dim); }
+.fnode.am .fi { color: var(--amber); border-color: rgba(225, 29, 72, 0.3); background: rgba(225, 29, 72, 0.05); }
+.fnode.rd .fi { color: var(--poison); border-color: rgba(225, 29, 72, 0.4); background: rgba(225, 29, 72, 0.08); }
+.fnode.am .ft { color: var(--amber); }
+.fnode.rd .ft { color: var(--poison); }
+.farrow { font-family: var(--f-mono); color: var(--rule-2); font-size: 1rem; }
 
 /* ================= interactive apparatus panels ================= */
 .apparatus { background: var(--panel); border: 1px solid var(--rule); }
