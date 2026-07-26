@@ -3,6 +3,7 @@ import { Newsreader, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import 'katex/dist/katex.min.css';
 import GlobalObserver from "../components/ui/GlobalObserver";
+import Glossary from "../components/ui/Glossary";
 
 const newsreader = Newsreader({
   subsets: ["latin"],
@@ -53,6 +54,7 @@ export default function RootLayout({
       <body>
         <GlobalObserver />
         {children}
+        <Glossary />
       </body>
     </html>
   );

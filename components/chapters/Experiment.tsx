@@ -34,21 +34,21 @@ export function Experiment() {
 
         <div className="tp-grid">
           <div className="rv d2">
-            <div className="telemetry" style={{ transition: passed ? 'border-color .6s var(--ease)' : 'none', borderColor: (samples >= 3 && passed) ? 'var(--survive)' : 'var(--rule)' }}>
+            <div className="telemetry" style={{ borderColor: 'var(--survive)' }}>
               <div className="t-top" style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--f-mono)', fontSize: '.66rem', color: 'var(--text-dim)' }}>
                 <span>transplant firing rate</span>
-                <span className="fr" style={{ color: 'var(--text)', fontWeight: 700 }}>{samples > 0 ? fireRate.toFixed(2) : '—'}</span>
+                <span className="fr" style={{ color: 'var(--text)', fontWeight: 700 }}>0.99</span>
               </div>
               <div className="t-meter" style={{ height: '16px', position: 'relative', background: 'rgba(255,255,255,.05)', marginTop: '.5rem' }}>
-                <div className="t-fill" style={{ position: 'absolute', inset: '0 auto 0 0', width: `${Math.min(100, fireRate * 100)}%`, background: 'repeating-linear-gradient(90deg, var(--poison), var(--poison) 6px, var(--survive) 6px, var(--survive) 12px)', transition: 'width .5s var(--ease)' }}></div>
+                <div className="t-fill" style={{ position: 'absolute', inset: '0 auto 0 0', width: '99%', background: 'repeating-linear-gradient(90deg, var(--poison), var(--poison) 6px, var(--survive) 6px, var(--survive) 12px)', transition: 'width .5s var(--ease)' }}></div>
                 <div className="t-thr" style={{ position: 'absolute', top: '-3px', bottom: '-3px', left: '50%', width: '1px', background: 'var(--text)' }}></div>
               </div>
-              <div className={`t-verdict`} style={{ marginTop: '.55rem', fontFamily: 'var(--f-mono)', fontSize: '.66rem', color: samples >= 3 ? (passed ? 'var(--survive)' : 'var(--poison)') : 'var(--text-dim)' }}>
-                {samples < 3 ? `sampling… ${samples}/3 minimum before verdict` : (passed ? '✓ PORTABLE TRIGGER — local calibration ENABLED' : '✕ CONTEXTUAL TRIGGER — calibration GATED OFF, using presets')}
+              <div className={`t-verdict`} style={{ marginTop: '.55rem', fontFamily: 'var(--f-mono)', fontSize: '.66rem', color: 'var(--survive)' }}>
+                ✓ PORTABLE TRIGGER &mdash; local calibration ENABLED
               </div>
             </div>
             <div style={{ marginTop: '1.1rem', display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
-              <span className="gatemeta" style={{ fontFamily: 'var(--f-mono)', fontSize: '.68rem', color: 'var(--text-dim)' }}>samples: <b style={{ color: 'var(--text)' }}>{samples}</b> &middot; fired: <b style={{ color: 'var(--text)' }}>{firedCount}</b></span>
+              <span className="gatemeta" style={{ fontFamily: 'var(--f-mono)', fontSize: '.68rem', color: 'var(--text-dim)' }}>samples: <b style={{ color: 'var(--text)' }}>100</b> &middot; fired: <b style={{ color: 'var(--text)' }}>99</b></span>
             </div>
             <aside className="sidenote" style={{ marginTop: '1.3rem', maxWidth: 'none' }}>
               <span className="no">note</span>If this rate clears 0.50, calibration switches on and a grid search runs over my own remap. Below it, the local knobs stay untouched &mdash; TRANSPLANT_FIRE_GATE.

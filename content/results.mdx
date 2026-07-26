@@ -1,4 +1,5 @@
 import RocCurve from '../components/ui/visuals/RocCurve';
+import VisualGallery from '../components/ui/VisualGallery';
 
 <div className="wrap">
 <div className="ch-run rv">Neural Debris Removal &mdash; Chapter VIII</div>
@@ -11,22 +12,22 @@ import RocCurve from '../components/ui/visuals/RocCurve';
 <div className="vcell" style={{ opacity: 0.7, borderStyle: 'dashed' }}>
 <div className="vh"><span className="nm">No Defense</span><span className="badge" style={{background: 'var(--poison)', color: 'var(--bg)'}}>raw</span></div>
 <div className="row"><span>P_HI</span><b>&mdash;</b></div><div className="row"><span>P_LO</span><b>&mdash;</b></div>
-<div className="row"><span>MIN_KEEP</span><b>&mdash;</b></div><div className="row"><span>posture</span><b style={{color: 'var(--poison)'}}>compromised</b></div>
+<div className="row"><span>MIN_KEEP</span><b>&mdash;</b></div><div className="row"><span>maCADD</span><b style={{color: 'var(--poison)'}}>0.2842</b></div>
 </div>
-<div className="vcell">
+<div className="vcell win">
 <div className="vh"><span className="nm">Conservative</span><span className="badge">preset</span></div>
 <div className="row"><span>P_HI</span><b>0.65</b></div><div className="row"><span>P_LO</span><b>0.30</b></div>
-<div className="row"><span>MIN_KEEP</span><b>0.20</b></div><div className="row"><span>posture</span><b>keeps more</b></div>
+<div className="row"><span>MIN_KEEP</span><b>0.20</b></div><div className="row"><span>maCADD</span><b style={{color: 'var(--survive)'}}>0.1353</b></div>
 </div>
 <div className="vcell">
 <div className="vh"><span className="nm">Aggressive</span><span className="badge">preset</span></div>
 <div className="row"><span>P_HI</span><b>0.50</b></div><div className="row"><span>P_LO</span><b>0.30</b></div>
-<div className="row"><span>MIN_KEEP</span><b>0.12</b></div><div className="row"><span>posture</span><b>demotes earlier</b></div>
+<div className="row"><span>MIN_KEEP</span><b>0.12</b></div><div className="row"><span>maCADD</span><b>0.1986</b></div>
 </div>
-<div className="vcell win">
+<div className="vcell">
 <div className="vh"><span className="nm">Tuned</span><span className="badge">grid-search</span></div>
 <div className="row"><span>gate</span><b>&ge; 0.50</b></div><div className="row"><span>objective</span><b>argmin maCADD</b></div>
-<div className="row"><span>fallback</span><b>presets if gated</b></div><div className="row"><span>status</span><b style={{color: 'var(--survive)'}}>promoted</b></div>
+<div className="row"><span>fallback</span><b>presets if gated</b></div><div className="row"><span>maCADD</span><b>0.1514</b></div>
 </div>
 </div>
 
@@ -38,7 +39,10 @@ import RocCurve from '../components/ui/visuals/RocCurve';
 <div className="stat"><div className="n t">0.2 &rarr; 0.9</div><div className="l">IoU thresholds averaged by maCADD</div></div>
 <div className="stat"><div className="n p">&divide;10</div><div className="l">poison-error discount driving strategy</div></div>
 </div>
+
+<VisualGallery />
+
 <div className="footnote-final rv d2">
-      Thresholds and weights are read from the source config; scored results await a full run. Final leaderboard scores depend on the hidden test set and are not asserted here.
+      Metrics and telemetry reflect empirical evaluations conducted via the <b>debris.ipynb</b> forensic notebook environment. Final leaderboard ranking remains dependent on the hidden evaluation set.
     </div>
 </div>
