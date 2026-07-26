@@ -256,3 +256,36 @@ footer { border-top: 1px solid var(--rule); padding-block: clamp(1.8rem, 4vw, 2.
     display: none !important;
   }
 }
+
+/* ================= notation table ================= */
+.notation { max-width: var(--measure); margin: 1.1rem auto; border: 1px solid var(--rule); font-family: var(--f-mono); font-size: .8rem; }
+.notation .tcap { font-family: var(--f-display); font-style: normal; font-weight: 600; font-size: .88rem; color: var(--text-dim); padding: .8rem 1rem; border-bottom: 1px solid var(--rule); }
+.notation .trow { display: grid; grid-template-columns: 110px 1fr; border-top: 1px solid var(--rule); }
+.notation .trow:first-of-type { border-top: 0; }
+.notation .trow .sym { padding: .5rem .9rem; color: var(--gold); border-right: 1px solid var(--rule); }
+.notation .trow .def { padding: .5rem .9rem; color: var(--text-dim); font-family: var(--f-serif); font-size: .92rem; }
+
+/* ================= algorithm box ================= */
+.algo { max-width: var(--measure); margin: 1.1rem auto; border: 1px solid var(--rule); background: var(--panel); }
+.algo .acap { font-family: var(--f-display); font-style: normal; font-weight: 600; font-size: .9rem; color: var(--text-dim); padding: .8rem 1.1rem; border-bottom: 1px solid var(--rule); }
+.algo ol { counter-reset: algoline; list-style: none; padding: .9rem 1.1rem; display: grid; gap: .35rem; font-family: var(--f-mono); font-size: .82rem; }
+.algo li { counter-increment: algoline; color: var(--text-dim); padding-left: 2rem; position: relative; line-height: 1.6; }
+.algo li::before { content: counter(algoline)":"; position: absolute; left: 0; color: var(--text-faint); }
+.algo li b { color: var(--text); font-weight: 700; }
+.algo li.indent { padding-left: 3.2rem; }
+.algo li.indent::before { left: 1.2rem; }
+
+/* ================= methodology: subsection list ================= */
+.ens-table { margin-top: .9rem; border: 1px solid var(--rule); font-family: var(--f-mono); font-size: .74rem; }
+.ens-table .er { display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px solid var(--rule); }
+.ens-table .er:first-child { border-top: 0; background: rgba(255,255,255,.03); color: var(--gold); }
+.ens-table .er > div { padding: .42rem .6rem; color: var(--text-dim); }
+.ens-frozen { margin-top: .7rem; font-family: var(--f-mono); font-size: .72rem; color: var(--text-faint); }
+.ens-frozen b { color: var(--text-dim); }
+.surv { margin-top: .9rem; display: grid; gap: .5rem; }
+.surv .row { display: grid; grid-template-columns: 5rem 1fr 3rem; gap: .6rem; align-items: center; font-family: var(--f-mono); font-size: .7rem; color: var(--text-dim); }
+.surv .row .track { height: 7px; background: rgba(255,255,255,.06); position: relative; }
+.surv .row .fill { position: absolute; inset: 0 auto 0 0; }
+.surv .clean .fill { background: var(--survive); }
+.surv .pois .fill { background: var(--poison); }
+.surv .val { text-align: right; }
