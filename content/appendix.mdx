@@ -35,7 +35,7 @@ python train.py --defense ewc --committee_size 4 --lr_search_space "0.001,0.005,
 <h3 className="ch-title" style={{fontSize: '1.25rem'}}>B. How This Was Built (Construction Note)</h3>
 </div>
 <div className="prose rv d2">
-  This document operates as a "digital thesis," migrating a raw Jupyter Notebook forensic pipeline into an interactive Next.js application. While the core arithmetic—specifically the `remap_confidence()` bounds and the scoring metrics in Chapter IV and VIII—execute real calculations in the browser, the underlying bounding box telemetry and deep latent feature extractions are pre-computed artifacts from the original PyTorch model.
+  This document operates as a "digital thesis," migrating a raw Jupyter Notebook forensic pipeline into an interactive Next.js application. Thresholds and weights are read from the source config; scored results await a full run.
 </div>
 
 <div className="ch-head rv d1" style={{marginTop: '2.5rem'}}>

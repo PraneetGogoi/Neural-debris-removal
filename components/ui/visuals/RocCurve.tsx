@@ -28,7 +28,7 @@ export default function RocCurve() {
         <div style={{ display: 'flex', gap: '1rem', fontFamily: 'var(--f-mono)', fontSize: '0.65rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <span style={{ width: '12px', height: '2px', background: 'var(--survive)' }}></span>
-            <span style={{ color: 'var(--text)' }}>Tuned Ensemble</span>
+            <span style={{ color: 'var(--text)' }}>Tuned Ensemble (Target)</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <span style={{ width: '12px', height: '2px', background: 'var(--poison)', borderTop: '2px dashed var(--bg)' }}></span>
@@ -80,13 +80,13 @@ export default function RocCurve() {
           />
           
           {/* Operating Point */}
-          <circle cx="80" cy="45" r="5" fill="var(--survive)" stroke="var(--bg)" strokeWidth="2" />
-          <text x="95" y="50" fill="var(--text)" fontSize="11" fontFamily="var(--f-mono)">Operating Pt (TPR: 0.98, FPR: 0.05)</text>
+          <circle cx="80" cy="45" r="5" fill="none" stroke="var(--survive)" strokeWidth="1" strokeDasharray="2 2" />
+          <text x="95" y="50" fill="var(--text-faint)" fontSize="11" fontFamily="var(--f-mono)">Operating Pt Target (TPR: 0.98, FPR: 0.05)</text>
 
         </svg>
       </div>
       <div style={{ marginTop: '0.8rem', fontFamily: 'var(--f-body)', fontSize: '0.9rem', color: 'var(--text-dim)', lineHeight: 1.5 }}>
-        Demonstrates the robust separation between clean celestial streaks and injected Trojan patches. The <strong>Tuned Ensemble</strong> preserves a 98% True Positive Rate at a nominal 5% False Positive Rate, whereas the unmitigated <strong>Baseline</strong> collapses toward random chance due to confident Trojan activations polluting the upper score deciles.
+        Demonstrates the theoretical robust separation between clean celestial streaks and injected Trojan patches. The <strong>Tuned Ensemble</strong> curve above is an illustrative design target modeling a 98% True Positive Rate at a nominal 5% False Positive Rate, not yet measured on the final test set.
       </div>
     </div>
   );

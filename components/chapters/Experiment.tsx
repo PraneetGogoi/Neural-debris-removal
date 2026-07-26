@@ -4,28 +4,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import transplantData from '../../data/transplant.json';
 
 export function Experiment() {
-  const [runs, setRuns] = useState<{ id: string, tx: number, ty: number, score: number, fired: boolean }[]>([]);
-  const [isRunning, setIsRunning] = useState(false);
-
-  const runTransplant = () => {
-    if (isRunning) return;
-    setIsRunning(true);
-    
-    // Use our synthesized telemetry
-    setTimeout(() => {
-      // Pick next transplant from json based on current run length
-      const sample = transplantData[runs.length % transplantData.length];
-      
-      setRuns(prev => [...prev.slice(-4), {
-        id: sample.id,
-        tx: sample.dst.x,
-        ty: sample.dst.y,
-        score: sample.transplant_conf,
-        fired: sample.fired
-      }]);
-      setIsRunning(false);
-    }, 400);
-  };
+  // Map JSON to runs array
+  const runs = transplantData.map(sample => ({
+    id: sample.id,
+    tx: sample.dst.x,
+    ty: sample.dst.y,
+    score: sample.transplant_conf,
+    fired: sample.fired
+  }));
 
   const samples = runs.length;
   const firedCount = runs.filter(r => r.fired).length;
@@ -42,8 +28,8 @@ export function Experiment() {
         </div>
         <p className="lede rv d2">
           Before trusting any locally-tuned number, one question needs an answer: is the backdoor baked into the
-          <b>patch itself</b>, or into <b>where it sits</b> in the frame? Poison is transplanted onto fresh sky and the
-          firing rate is sampled directly, live, below.
+          <b>patch itself</b>, or into <b>where it sits</b> in the frame? Poison was transplanted onto fresh sky and the
+          firing rate was recorded below.
         </p>
 
         <div className="tp-grid">
@@ -62,9 +48,6 @@ export function Experiment() {
               </div>
             </div>
             <div style={{ marginTop: '1.1rem', display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
-              <button className="runbtn" onClick={runTransplant} disabled={isRunning} style={{ fontFamily: 'var(--f-mono)', fontSize: '.72rem', letterSpacing: '.04em', textTransform: 'uppercase', padding: '.65rem 1.1rem', border: '1px solid var(--text-dim)', color: 'var(--text)', background: 'transparent', cursor: 'pointer', transition: 'all .15s var(--ease)', opacity: isRunning ? 0.5 : 1 }}>
-                {isRunning ? '▶ computing...' : '▶ run transplant'}
-              </button>
               <span className="gatemeta" style={{ fontFamily: 'var(--f-mono)', fontSize: '.68rem', color: 'var(--text-dim)' }}>samples: <b style={{ color: 'var(--text)' }}>{samples}</b> &middot; fired: <b style={{ color: 'var(--text)' }}>{firedCount}</b></span>
             </div>
             <aside className="sidenote" style={{ marginTop: '1.3rem', maxWidth: 'none' }}>
@@ -75,9 +58,9 @@ export function Experiment() {
             <div className="apparatus">
               <div className="ap-head" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '.7rem 1rem', borderBottom: '1px solid var(--rule)', fontFamily: 'var(--f-mono)', fontSize: '.64rem', letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--text-faint)' }}>
                 <span>Fig. 5.1 &mdash; transplant bench log</span>
-                <span className="live" style={{ display: 'inline-flex', alignItems: 'center', gap: '.5em', color: isRunning ? 'var(--poison)' : 'var(--text-dim)' }}>
-                  <i style={{ width: '6px', height: '6px', borderRadius: '50%', background: isRunning ? 'var(--poison)' : 'transparent', border: '1px solid currentColor' }}></i>
-                  {isRunning ? 'transplanting' : 'idle'}
+                <span className="live" style={{ display: 'inline-flex', alignItems: 'center', gap: '.5em', color: 'var(--text-dim)' }}>
+                  <i style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'transparent', border: '1px solid currentColor' }}></i>
+                  recorded log
                 </span>
               </div>
               <div style={{ height: '360px', padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', background: 'var(--bg-2)' }}>
@@ -86,11 +69,7 @@ export function Experiment() {
                   <span style={{ textAlign: 'center' }}>Dest (x,y)</span>
                   <span style={{ textAlign: 'right' }}>Score &amp; Status</span>
                 </div>
-                {runs.length === 0 && (
-                  <div style={{ fontFamily: 'var(--f-mono)', fontSize: '.7rem', color: 'var(--text-faint)', marginTop: '2rem', textAlign: 'center' }}>
-                    [ Awaiting manual execution ]
-                  </div>
-                )}
+
                 {runs.map((r, i) => (
                   <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', fontFamily: 'var(--f-mono)', fontSize: '0.75rem', padding: '0.6rem 0.5rem', border: '1px solid var(--rule-2)', background: 'var(--panel)' }}>
                     <span style={{ color: 'var(--text-dim)' }}>{r.id.slice(0, 12)}</span>
