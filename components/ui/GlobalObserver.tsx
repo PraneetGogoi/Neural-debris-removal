@@ -23,8 +23,8 @@ export default function GlobalObserver() {
         entries.forEach(e => {
           if (e.isIntersecting) {
             const id = (e.target as HTMLElement).id;
-            tabs.forEach(t => t.classList.toggle("active", t.dataset.target === id));
-            tocLinks.forEach(t => t.classList.toggle("active", t.dataset.target === id));
+            tabs.forEach(t => t.classList.toggle("active", t.getAttribute('data-target') === id));
+            tocLinks.forEach(t => t.classList.toggle("active", t.getAttribute('data-target') === id));
             if (id && window.location.hash !== `#${id}`) {
               window.history.replaceState(null, '', `#${id}`);
             }
@@ -39,19 +39,29 @@ export default function GlobalObserver() {
       };
     }
   }, [pathname]);
-
   useEffect(() => {
-    // Reading progress bar
+    // Reading progress bar & scrolled state
     const bar = document.getElementById("scrollProgress");
-    if (!bar) return;
+    const tocBar = document.getElementById("tocProgress");
     
     const handleScroll = () => {
       const docH = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollP = docH > 0 ? (window.scrollY / docH) * 100 : 0;
-      bar.style.width = Math.min(100, Math.max(0, scrollP)) + "%";
+      const scrollP = docH > 0 ? (window.scrollY / docH) : 0;
+      
+      if (bar) bar.style.width = Math.min(100, Math.max(0, scrollP * 100)) + "%";
+      if (tocBar) tocBar.style.transform = `scaleY(${Math.min(1, Math.max(0, scrollP))})`;
+      
+      if (window.scrollY > 80) {
+        document.body.classList.add("scrolled");
+      } else {
+        document.body.classList.remove("scrolled");
+      }
     };
     
     window.addEventListener("scroll", handleScroll, { passive: true });
+    // Initialize state
+    handleScroll();
+    
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
 
