@@ -1,0 +1,39 @@
+<div className="wrap">
+<div className="ch-run rv">Neural Debris Removal &mdash; Chapter II</div>
+<div className="ch-head rv d1">
+<span className="ch-num">II.</span>
+<h2 className="ch-title">Related work</h2>
+</div>
+<div className="subsec rv d2" style={{marginTop: '1.8rem'}}>
+<span className="sn">2.1</span>
+<h3>Backdoor Implantation in Dense Detectors <span className="tg">&mdash; from classification to spatial triggers</span></h3>
+<div className="prose">
+        The detector under study is a RetinaNet<sup><a href="#ref1">[1]</a></sup> with a Feature Pyramid Network backbone<sup><a href="#ref2">[2]</a></sup>, chosen for its single-stage dense prediction and its transparent anchor mechanics. While foundational data-poisoning attacks like BadNets<sup><a href="#ref3">[3]</a></sup> and blend injection<sup><a href="#ref14">[14]</a></sup> were formulated for image classification to induce global label flips, dense spatial detectors expose a fundamentally different vulnerability surface. Recent research by Chan et al.<sup><a href="#ref6">[6]</a></sup> (BibaNet) and Luo et al.<sup><a href="#ref7">[7]</a></sup> demonstrates that localized patch injection can corrupt specific pyramid feature maps without perturbing global scene semantics. In our astronomical streak detector, the backdoor does not misclassify an existing star; rather, it forces anchor boxes across multiple FPN scales to hallucinate high-confidence <em>phantom streaks</em> whenever the physical trigger pattern is present.
+      </div>
+<div className="tagrow"><span className="tag">RetinaNet + FPN <b>[1, 2]</b></span><span className="tag">spatial backdoors <b>[6, 7]</b></span><span className="tag">phantom generation</span></div>
+</div>
+<div className="subsec rv" style={{marginTop: '2.4rem'}}>
+<span className="sn">2.2</span>
+<h3>Neural Forensics &amp; Diagnostic Input Probing <span className="tg">&mdash; reverse-engineering physical Trojans</span></h3>
+<div className="prose">
+        Detecting backdoors when training weights cannot be inspected requires input-space diagnostic probing. Foundational neural forensics approaches like Neural Cleanse<sup><a href="#ref8">[8]</a></sup> optimize synthetic input patterns to uncover minimal adversarial perturbations, while STRIP<sup><a href="#ref9">[9]</a></sup> measures prediction entropy under image superposition to separate clean inputs from Trojaned samples. Similarly, Fine-Pruning<sup><a href="#ref10">[10]</a></sup> investigates dormant internal representations to locate trigger-activated pathways. Our <em>transplant probe</em> (&sect; V) builds on these physical probing principles: by surgically cutting suspected trigger patches and transplanting them onto uncorrupted background regions, we empirically measure trigger portability and decoupling from localized context without requiring direct gradient access to the victim model.
+      </div>
+<div className="tagrow"><span className="tag">Neural Cleanse <b>[8]</b></span><span className="tag">entropy probing <b>[9]</b></span><span className="tag">dormant pathways <b>[10]</b></span></div>
+</div>
+<div className="subsec rv" style={{marginTop: '2.4rem'}}>
+<span className="sn">2.3</span>
+<h3>Machine Unlearning &amp; Parameter Scrubbing <span className="tg">&mdash; selective forgetting vs. diagnostic fine-tuning</span></h3>
+<div className="prose">
+        Formalized by Bourtoule et al.<sup><a href="#ref4">[4]</a></sup> via SISA (Sharded, Isolated, Sliced, and Aggregated training), exact machine unlearning seeks to erase the influence of poisoned samples. For deep overparameterized networks, approximate weight scrubbing strategies&mdash;such as Fisher Information Matrix erasure<sup><a href="#ref11">[11]</a></sup>, parameter trajectory tracking in Amnesiac ML<sup><a href="#ref12">[12]</a></sup>, and contrastive buffer unlearning (SCRUB)<sup><a href="#ref13">[13]</a></sup>&mdash;attempt to remove backdoor weights while retaining clean representation capabilities. In contrast to complete erasure, our framework deploys unlearning <em>diagnostically</em>: by freezing the backbone and fine-tuning only the classification head across an ensemble of learning rates and random seeds (&sect; VI), we force poisoned candidate boxes into rapid survival divergence while clean detections remain robustly anchored.
+      </div>
+<div className="tagrow"><span className="tag">exact SISA unlearning <b>[4]</b></span><span className="tag">Fisher scrubbing <b>[11, 12]</b></span><span className="tag">diagnostic ensemble</span></div>
+</div>
+<div className="subsec rv" style={{marginTop: '2.4rem'}}>
+<span className="sn">2.4</span>
+<h3>Post-Processing Forensics &amp; Confidence Calibration <span className="tg">&mdash; bipartite assignment and soft demotion</span></h3>
+<div className="prose">
+        Once survival and geometric signals are extracted, reconciling predicted candidate bounding boxes with clean reference annotations requires optimal bipartite matching via the Hungarian algorithm<sup><a href="#ref5">[5]</a></sup>, the computational foundation of our surrogate maCADD metric. Furthermore, standard neural network detectors notoriously suffer from overconfidence on out-of-distribution or adversarial anomalies<sup><a href="#ref15">[15]</a></sup>. Drawing inspiration from dropout uncertainty sampling<sup><a href="#ref16">[16]</a></sup> and post-hoc calibration studies, our confidence remapping program (&sect; VIII) rejects hard thresholding in favor of smooth epsilon-demotion, preserving plausible ambiguous detections while reliably degrading identified poison candidates to noise floor levels.
+      </div>
+<div className="tagrow"><span className="tag">Hungarian matching <b>[5]</b></span><span className="tag">network calibration <b>[15]</b></span><span className="tag">epsilon demotion <b>[16]</b></span></div>
+</div>
+</div>

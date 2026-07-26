@@ -1,0 +1,9 @@
+{
+  "candidates": [
+    { "id": "clean_1", "confidence": 0.88, "geometry": {"aspect_ratio": 3.4}, "transplant_score": 0.05, "is_poison": false },
+    { "id": "clean_2", "confidence": 0.92, "geometry": {"aspect_ratio": 4.1}, "transplant_score": 0.02, "is_poison": false },
+    { "id": "clean_3", "confidence": 0.75, "geometry": {"aspect_ratio": 2.2}, "transplant_score": 0.04, "is_poison": false },
+    { "id": "poison_1", "confidence": 0.98, "geometry": {"aspect_ratio": 1.1}, "transplant_score": 0.96, "is_poison": true },
+    { "id": "poison_2", "confidence": 0.94, "geometry": {"aspect_ratio": 1.05}, "transplant_score": 0.92, "is_poison": true }
+  ]
+}

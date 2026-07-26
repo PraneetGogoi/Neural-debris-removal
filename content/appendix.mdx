@@ -1,0 +1,71 @@
+<div className="wrap" id="appendix" style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '2px solid var(--rule-2)' }}>
+<div className="ch-run rv">Neural Debris Removal &mdash; Appendix</div>
+<div className="ch-head rv d1">
+<span className="ch-num">X.</span>
+<h2 className="ch-title">Appendix &amp; Colophon</h2>
+</div>
+<div className="lede rv d2">
+  Reproducibility, citations, and author notes.
+</div>
+
+<div className="ch-head rv d1" style={{marginTop: '2.5rem'}}>
+<h3 className="ch-title" style={{fontSize: '1.25rem'}}>A. Reproducibility &amp; Commands</h3>
+</div>
+<div className="prose rv d2">
+  To reproduce the unlearning ensemble results, clone the repository and fetch the surrogate celestial dataset. The script requires Python 3.10+ and a CUDA-enabled GPU (minimum 8GB VRAM).
+</div>
+<div className="figure rv d2">
+<div className="fig-panel">
+```bash
+# 1. Environment Setup
+git clone https://github.com/praneetgogoi/Neural-debris-removal.git
+cd Neural-debris-removal
+pip install -r requirements.txt
+
+# 2. Fetch the synthetic sky dataset (simulated streaks & patches)
+python scripts/fetch_dataset.py --set train_v2
+
+# 3. Run the defense pipeline (Committee size: 4)
+python train.py --defense ewc --committee_size 4 --lr_search_space "0.001,0.005,0.01"
+```
+</div>
+</div>
+
+<div className="ch-head rv d1" style={{marginTop: '2.5rem'}}>
+<h3 className="ch-title" style={{fontSize: '1.25rem'}}>B. How This Was Built (Construction Note)</h3>
+</div>
+<div className="prose rv d2">
+  This document operates as a "digital thesis," migrating a raw Jupyter Notebook forensic pipeline into an interactive Next.js application. While the core arithmetic—specifically the `remap_confidence()` bounds and the scoring metrics in Chapter IV and VIII—execute real calculations in the browser, the underlying bounding box telemetry and deep latent feature extractions are pre-computed artifacts from the original PyTorch model.
+</div>
+
+<div className="ch-head rv d1" style={{marginTop: '2.5rem'}}>
+<h3 className="ch-title" style={{fontSize: '1.25rem'}}>C. Citation</h3>
+</div>
+<div className="prose rv d2">
+  If you found this methodology useful for adversarial defense in continuous streaming detection models, please cite:
+</div>
+<div className="figure rv d2">
+<div className="fig-panel" style={{ fontFamily: 'var(--f-mono)', fontSize: '0.8rem', color: 'var(--text-dim)', overflowX: 'auto', whiteSpace: 'pre' }}>
+@misc&#123;gogoi2026neural,
+  title=&#123;Neural Debris Removal: Forensic Recovery of a Poisoned Sky&#125;,
+  author=&#123;Gogoi, Praneet&#125;,
+  year=&#123;2026&#125;,
+  url=&#123;https://github.com/praneetgogoi/Neural-debris-removal&#125;
+&#125;
+</div>
+</div>
+
+<div className="ch-head rv d1" style={{marginTop: '2.5rem'}}>
+<h3 className="ch-title" style={{fontSize: '1.25rem'}}>D. About the Author</h3>
+</div>
+<div className="prose rv d2">
+  **Praneet Gogoi** is a software engineer and ML researcher specializing in adversarial robustness and interactive data systems. 
+  
+  You can view more of my work at my [portfolio](https://praneetgogoi.vercel.app), explore the [Silicon Ledger](https://praneetgogoi.vercel.app/silicon-ledger) project, or read my paper on [IndicSignAI](https://praneetgogoi.vercel.app/indicsignai). Feel free to reach out or review the source code for this thesis on [GitHub](https://github.com/praneetgogoi).
+</div>
+
+<div className="sidenote rv d2" style={{ marginTop: '3rem' }}>
+  <span className="no">Revision History</span>
+  v1.0 &mdash; Migrated to Next.js Interactive Thesis (July 2026)
+</div>
+</div>

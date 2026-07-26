@@ -1,0 +1,47 @@
+import RocCurve from '../components/ui/visuals/RocCurve';
+
+<div className="wrap">
+<div className="ch-run rv">Neural Debris Removal &mdash; Chapter VIII</div>
+<div className="ch-head rv d1">
+<span className="ch-num">VIII.</span>
+<h2 className="ch-title">Results &amp; discussion &mdash; three scalpels, one <em>promoted</em></h2>
+</div>
+<div className="lede rv d2">Each variant is measured on poison-mass (unlearn set) and a surrogate maCADD; the pipeline auto-copies the winner to <span className="im">submission.csv</span>.</div>
+<div className="variants rv d2" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+<div className="vcell" style={{ opacity: 0.7, borderStyle: 'dashed' }}>
+<div className="vh"><span className="nm">No Defense</span><span className="badge" style={{background: 'var(--poison)', color: 'var(--bg)'}}>raw</span></div>
+<div className="row"><span>P_HI</span><b>&mdash;</b></div><div className="row"><span>P_LO</span><b>&mdash;</b></div>
+<div className="row"><span>MIN_KEEP</span><b>&mdash;</b></div><div className="row"><span>posture</span><b style={{color: 'var(--poison)'}}>compromised</b></div>
+</div>
+<div className="vcell">
+<div className="vh"><span className="nm">Conservative</span><span className="badge">preset</span></div>
+<div className="row"><span>P_HI</span><b>0.65</b></div><div className="row"><span>P_LO</span><b>0.30</b></div>
+<div className="row"><span>MIN_KEEP</span><b>0.20</b></div><div className="row"><span>posture</span><b>keeps more</b></div>
+</div>
+<div className="vcell">
+<div className="vh"><span className="nm">Aggressive</span><span className="badge">preset</span></div>
+<div className="row"><span>P_HI</span><b>0.50</b></div><div className="row"><span>P_LO</span><b>0.30</b></div>
+<div className="row"><span>MIN_KEEP</span><b>0.12</b></div><div className="row"><span>posture</span><b>demotes earlier</b></div>
+</div>
+<div className="vcell win">
+<div className="vh"><span className="nm">Tuned</span><span className="badge">grid-search</span></div>
+<div className="row"><span>gate</span><b>&ge; 0.50</b></div><div className="row"><span>objective</span><b>argmin maCADD</b></div>
+<div className="row"><span>fallback</span><b>presets if gated</b></div><div className="row"><span>status</span><b style={{color: 'var(--survive)'}}>promoted</b></div>
+</div>
+</div>
+
+<RocCurve />
+
+<div className="stat-strip rv d2">
+<div className="stat"><div className="n p">&asymp; 0.2</div><div className="l">poison-mass floor, unlearn set</div></div>
+<div className="stat"><div className="n t">&times;4</div><div className="l">unlearning models in the committee</div></div>
+<div className="stat"><div className="n t">0.2 &rarr; 0.9</div><div className="l">IoU thresholds averaged by maCADD</div></div>
+<div className="stat"><div className="n p">&divide;10</div><div className="l">poison-error discount driving strategy</div></div>
+</div>
+<div className="footnote-final rv d2">
+      Figures presented throughout are the pipeline's measured design targets and configuration &mdash; thresholds,
+      weights, the poison-mass floor, the scoring construction &mdash; read directly from the source notebook. Final
+      leaderboard scores depend on the hidden test set and are not asserted here. Figure 4.1 computes the model's
+      own remap_confidence() exactly, not an approximation.
+    </div>
+</div>

@@ -1,0 +1,121 @@
+<div className="wrap">
+<div className="ch-run rv">Neural Debris Removal &mdash; Chapter III</div>
+<div className="ch-head rv d1">
+<span className="ch-num">III.</span>
+<h2 className="ch-title">Methodology &mdash; making the <em>model</em> confess</h2>
+</div>
+<div className="lede rv d2">
+      Seven stages, one signal chain &mdash; from a wide recall net down to a scored, remapped submission. Each subsection
+      adds a different kind of evidence about whether a candidate box is real or planted.
+    </div>
+<div className="figure rv d2" style={{marginTop: '1.6rem'}}>
+<div className="flowwrap">
+<div className="flowchart">
+<div className="fnode"><div className="fi">00</div><div className="ft">Candidates</div></div>
+<div className="farrow">&rarr;</div>
+<div className="fnode am"><div className="fi">01</div><div className="ft">Transplant</div></div>
+<div className="farrow">&rarr;</div>
+<div className="fnode"><div className="fi">02</div><div className="ft">Unlearn &times;4</div></div>
+<div className="farrow">&rarr;</div>
+<div className="fnode"><div className="fi">03</div><div className="ft">Survival</div></div>
+<div className="farrow">&rarr;</div>
+<div className="fnode"><div className="fi">04</div><div className="ft">Appearance</div></div>
+<div className="farrow">&rarr;</div>
+<div className="fnode rd"><div className="fi">05</div><div className="ft">Remap</div></div>
+<div className="farrow">&rarr;</div>
+<div className="fnode"><div className="fi">06</div><div className="ft">Submit</div></div>
+</div>
+</div>
+<figcaption data-fig="Fig. 3.0 &mdash; ">Pipeline overview. Amber marks the diagnostic stage (&sect;3.2); red marks the intervention stage (&sect;3.6). Every other stage produces evidence consumed downstream.</figcaption>
+</div>
+<div className="notation rv d2">
+<div className="tcap">Table 3.1 &mdash; Notation used throughout Chapters III&ndash;VI</div>
+<div className="trow"><div className="sym">s</div><div className="def">raw confidence score output by the poisoned detector for a candidate box</div></div>
+<div className="trow"><div className="sym">p_poison</div><div className="def">fused poison probability for a candidate, in [0, 1]</div></div>
+<div className="trow"><div className="sym">P_HI, P_LO</div><div className="def">upper / lower thresholds on p_poison bounding the remap ramp</div></div>
+<div className="trow"><div className="sym">MIN_KEEP</div><div className="def">score floor below which a candidate is dropped outright</div></div>
+<div className="trow"><div className="sym">&epsilon;</div><div className="def">the demotion floor (0.01) a flagged box is remapped to, instead of 0</div></div>
+<div className="trow"><div className="sym">IoU</div><div className="def">intersection-over-union, used for matching in survival scoring and in maCADD</div></div>
+<div className="trow"><div className="sym">A_FACTOR</div><div className="def">the &times;10 asymmetry discount applied to poison-box errors under maCADD (Chapter VI)</div></div>
+</div>
+<div className="algo rv d2">
+<div className="acap">Algorithm 1 &mdash; Poison-aware submission pipeline</div>
+<ol>
+<li><b>input:</b> poisoned detector D, test field I, unlearn set U</li>
+<li>C &larr; D(I) at score floor 0.05 <span style={{color: 'var(--text-faint)'}}>// &sect;3.1 candidates</span></li>
+<li>rate &larr; TransplantProbe(D) <span style={{color: 'var(--text-faint)'}}>// &sect;3.2</span></li>
+<li className="indent">if rate &ge; 0.50: calibration &larr; ENABLED else GATED</li>
+<li>E &larr; \{UnlearnHead(D, U, lr_i, seed_i) for i in 1..4\} <span style={{color: 'var(--text-faint)'}}>// &sect;3.3</span></li>
+<li>for c in C:</li>
+<li className="indent">signal_surv(c) &larr; 1 &minus; mean(E(c)) / D(c) <span style={{color: 'var(--text-faint)'}}>// &sect;3.4, Eq. 1</span></li>
+<li className="indent">signal_app(c) &larr; TinyCNN(crop(c)) <span style={{color: 'var(--text-faint)'}}>// &sect;3.5</span></li>
+<li className="indent">p_poison(c) &larr; fuse(signal_surv, signal_app, signal_geo) <span style={{color: 'var(--text-faint)'}}>// Eq. 2</span></li>
+<li className="indent">conf'(c) &larr; remap(c.s, p_poison(c)) <span style={{color: 'var(--text-faint)'}}>// &sect;3.6, Eq. 3</span></li>
+<li><b>return</b> argmin over \{conservative, aggressive, tuned\} of surrogate-maCADD <span style={{color: 'var(--text-faint)'}}>// &sect;3.7</span></li>
+</ol>
+</div>
+<div className="subsec rv" style={{marginTop: '2.4rem'}}>
+<span className="sn">3.1</span>
+<h3>Cast a wide net <span className="tg">&mdash; candidate generation</span></h3>
+<div>The poisoned model is run at a deliberately low score floor so nothing real slips through; recall is favoured over precision, since filtering happens later with better evidence.</div>
+<div className="tagrow"><span className="tag">score floor <b>0.05</b></span><span className="tag">classes <b>1 &middot; streak</b></span><span className="tag">device <b>cpu / mps</b></span><span className="tag">cache <b>.pkl</b></span></div>
+</div>
+<div className="subsec rv">
+<span className="sn">3.2</span>
+<h3>The transplant probe <span className="tg">&mdash; does the trigger travel?</span></h3>
+<div>A poison patch is cut from one image and pasted onto a fresh background where it has never appeared. If the model still fires, the trigger is <span className="im">portable</span> and a locally-tuned remap can be trusted; if it stays quiet, the trigger is contextual and calibration is gated off. This diagnostic is developed fully as Chapter V.</div>
+<div className="tagrow"><span className="tag">spots / patch <b>5</b></span><span className="tag">IoU fire <b>&ge; 0.30</b></span><span className="tag">feather blend <b>3px</b></span><span className="tag">fire gate <b>0.50</b></span></div>
+</div>
+<div className="with-note">
+<div className="subsec" style={{margin: 0}}>
+<span className="sn">3.3</span>
+<h3>Unlearning ensemble <span className="tg">&mdash; classifier-only fine-tune</span></h3>
+<div>The model is fine-tuned on the unlearn set with <em>empty</em> labels, but with everything frozen except the classification head (<span className="im">cls_score</span>, <span className="im">cls_subnet</span>). The detector keeps its eyes; it forgets only what it was told to shout about. Four seeds and learning rates form a disagreement committee.</div>
+<div className="ens-table">
+<div className="er"><div>model</div><div>lr</div><div>iters &middot; seed</div></div>
+<div className="er"><div>ens &middot; A</div><div>3e-4</div><div>20 &middot; s42</div></div>
+<div className="er"><div>ens &middot; B</div><div>5e-4</div><div>20 &middot; s42</div></div>
+<div className="er"><div>ens &middot; C</div><div>5e-4</div><div>30 &middot; s7</div></div>
+<div className="er"><div>ens &middot; D</div><div>7e-4</div><div>15 &middot; s13</div></div>
+</div>
+<div className="ens-frozen">frozen: <b>backbone &middot; FPN &middot; box regression &middot; anchors</b> &mdash; only classification logits move.</div>
+</div>
+<aside className="sidenote"><span className="no">note</span>Why cell 10 exists: a portable trigger means I get to calibrate on my own synthetic set. A contextual trigger means I keep my hands off the local knobs entirely.</aside>
+</div>
+<div className="subsec rv">
+<span className="sn">3.4</span>
+<h3>Survival scoring <span className="tg">&mdash; primary signal, weight 0.75</span></h3>
+<div>For each candidate: how much confidence <em>survived</em> unlearning? Real streaks keep firing across the ensemble; poison confidence collapses, since collapsing it was the point. Low survival implies high poison probability.</div>
+<div className="eqn"><div className="eqn-body" id="eq1"></div><span className="eqn-no">(1)</span></div>
+<div className="surv">
+<div className="row clean"><span>clean box</span><span className="track"><span className="fill" style={{width: '88%'}}></span></span><span className="val">0.88</span></div>
+<div className="row clean"><span>clean box</span><span className="track"><span className="fill" style={{width: '79%'}}></span></span><span className="val">0.79</span></div>
+<div className="row pois"><span>poison</span><span className="track"><span className="fill" style={{width: '14%'}}></span></span><span className="val">0.14</span></div>
+<div className="row pois"><span>poison</span><span className="track"><span className="fill" style={{width: '9%'}}></span></span><span className="val">0.09</span></div>
+</div>
+<div className="tagrow"><span className="tag">match IoU <b>0.70</b></span><span className="tag">signal <b>1 &minus; ens/base</b></span><span className="tag">geometry <b>w 0.05</b></span></div>
+</div>
+<div className="subsec rv">
+<span className="sn">3.5</span>
+<h3>Appearance CNN <span className="tg">&mdash; secondary signal, weight 0.20</span></h3>
+<div>A three-convolution network learns poison texture directly: positives are real poison crops, negatives are synthetic streaks drawn on clean backgrounds. It votes on whether a 64&times;64 crop looks planted or celestial.</div>
+<div className="tagrow"><span className="tag">arch <b>16&rarr;32&rarr;64 &middot; GAP</b></span><span className="tag">crop <b>64px &middot; MAD-norm</b></span><span className="tag">train <b>400/class &middot; 15ep</b></span></div>
+</div>
+<div className="with-note">
+<div className="subsec" style={{margin: 0}}>
+<span className="sn">3.6</span>
+<h3>Confidence remap <span className="tg">&mdash; the guidance program</span></h3>
+<div>The three signals fuse into <span className="im r">p_poison</span> (Eq. 2). High p_poison on a strong box is <em>demoted to &epsilon;</em> rather than deleted; low p_poison is trusted as-is; the region between ramps down; noise-floor boxes are dropped outright (Eq. 3). This surface is built as an interactive apparatus in Chapter IV.</div>
+<div className="eqn"><div className="eqn-body" id="eq2"></div><span className="eqn-no">(2)</span></div>
+<div className="eqn"><div className="eqn-body" id="eq3"></div><span className="eqn-no">(3)</span></div>
+<div className="tagrow"><span className="tag">P_HI <b>flag &rarr; &epsilon;</b></span><span className="tag">P_LO <b>trust</b></span><span className="tag">MIN_KEEP <b>drop noise</b></span><span className="tag">&epsilon; <b>0.01</b></span></div>
+</div>
+<aside className="sidenote"><span className="no">note</span>Deleting flagged boxes felt satisfying and scored terribly. Demoting to &epsilon; preserves the box geometry the metric secretly rewards &mdash; the hardest lesson of this thesis.</aside>
+</div>
+<div className="subsec rv">
+<span className="sn">3.7</span>
+<h3>Submission <span className="tg">&mdash; conservative &middot; aggressive &middot; tuned</span></h3>
+<div>Three remap variants plus raw-probe baselines are emitted; poison-mass on the unlearn set (floor &asymp; 0.2) and a surrogate maCADD are measured, and the best is auto-promoted to <span className="im">submission.csv</span>.</div>
+<div className="tagrow"><span className="tag">format <b>conf x y w h</b></span><span className="tag">clip <b>0&ndash;1024</b></span><span className="tag">select <b>argmin maCADD</b></span></div>
+</div>
+</div>

@@ -1,0 +1,27 @@
+import ExplorationIndex from '../components/ui/ExplorationIndex';
+
+<div className="wrap">
+<div className="ch-run rv">Neural Debris Removal &mdash; Chapter VI</div>
+<div className="ch-head rv d1">
+<span className="ch-num">VI.</span>
+<h2 className="ch-title">On scoring &mdash; a metric that forgives poison</h2>
+</div>
+<div className="prose rv d2">
+      maCADD matches submitted boxes to a clean model's using Hungarian assignment across IoU thresholds 0.2 through
+      0.9, then sums the confidence gaps. Critically, the penalty is <b>asymmetric</b> (Eq. 4): being wrong about a
+      poison box costs a tenth of being wrong about a genuine streak. The entire defense strategy in Chapter III is
+      built around that single asymmetry.
+    </div>
+<div className="eqn rv d2"><div className="eqn-body" id="eq4"></div><span className="eqn-no">(4)</span></div>
+<div className="asym rv d2">
+<div className="cell b"><div className="l">error, clean streak</div><div className="amt">&times;1.0</div><div className="d">Full price. Precious &mdash; don't touch what works.</div></div>
+<div className="cell a"><div className="l">error, poison box</div><div className="amt">&divide;10</div><div className="d">A_FACTOR = 10. Exactly why demote-to-&epsilon; outperforms delete.</div></div>
+</div>
+<div className="with-note rv d2" style={{marginTop: '1.8rem', marginBottom: '1.6rem', padding: '1.2rem', background: 'var(--panel)', border: '1px solid var(--rule)', borderLeft: '3px solid var(--amber)', maxWidth: 'var(--measure)', marginInline: 'auto'}}>
+<div className="prose" style={{marginTop: 0, color: 'var(--text)'}}>
+<strong>Note on Extended Defenses:</strong> Sections VI-A through VI-L detail advanced forensic techniques and statistical certifications explored during the design phase. These represent theoretical targets and extended defenses; they are <em>not yet benchmarked</em> on the final live test sets.
+      </div>
+</div>
+<ExplorationIndex />
+<div className="footnote-final rv d2">The metric is, in effect, quietly asking to keep boxes and simply quiet the suspicious ones &mdash; which is precisely what the remap program in Chapter IV does.</div>
+</div>

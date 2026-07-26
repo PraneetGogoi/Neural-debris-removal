@@ -1,0 +1,34 @@
+import AnchorSvg from '../components/ui/visuals/AnchorSvg';
+
+<div className="wrap">
+<div className="ch-run rv">Neural Debris Removal &mdash; Chapter VII</div>
+<div className="ch-head rv d1">
+<span className="ch-num">VII.</span>
+<h2 className="ch-title">System specification</h2>
+</div>
+<div className="prose rv d2">
+      Anchors are tuned for <em>streaks</em>, not blobs. Standard detectors assume roughly square objects; streaks
+      are long and thin, so aspect ratios stretch from 0.1 to 10.0 &mdash; the single most subject-specific choice in the
+      configuration (Fig. 7.1).
+    </div>
+<div className="speckv rv d2">
+<div className="col">
+<div className="r"><span className="k">architecture</span><span className="v">RetinaNet &middot; R50-FPN 3&times;</span></div>
+<div className="r"><span className="k">classes</span><span className="v">1 (streak)</span></div>
+<div className="r"><span className="k">input</span><span className="v">1024&sup2; &middot; 16-bit &rarr; 3ch</span></div>
+<div className="r"><span className="k">batch</span><span className="v">4</span></div>
+<div className="r"><span className="k">weights</span><span className="v">poisoned_model.pth</span></div>
+</div>
+<div className="col">
+<div className="r"><span className="k">survival &Delta;</span><span className="v">w 0.75</span></div>
+<div className="r"><span className="k">appearance CNN</span><span className="v">w 0.20</span></div>
+<div className="r"><span className="k">geometry (Mahal.)</span><span className="v">w 0.05</span></div>
+<div className="r"><span className="k">cand. threshold</span><span className="v">0.05</span></div>
+<div className="r"><span className="k">ensemble threshold</span><span className="v">0.01</span></div>
+</div>
+</div>
+<div className="figure rv d3">
+<AnchorSvg />
+<figcaption data-fig="Fig. 7.1 &mdash; ">Anchor aspect ratios 0.1 &rarr; 10.0. Thin streaks live at the extremes; standard square-ish anchors (ratio &asymp; 1) contribute least.</figcaption>
+</div>
+</div>

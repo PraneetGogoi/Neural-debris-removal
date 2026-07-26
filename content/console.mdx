@@ -1,0 +1,21 @@
+import DecisionSurface from '../components/ui/visuals/DecisionSurface';
+
+<div className="wrap">
+<div className="ch-run rv">Neural Debris Removal &mdash; Chapter IV</div>
+<div className="ch-head rv d1">
+<span className="ch-num">IV.</span>
+<h2 className="ch-title">Apparatus &mdash; turning the <em>scalpel</em></h2>
+</div>
+<div className="lede rv d2">
+      Figure 3.1 is not a mock-up: it computes the model's own <span className="im">remap_confidence()</span> function
+      live. Drag the thresholds and watch every box's fate recompute on the decision surface.
+      <b>Green survives with high confidence; red is demoted toward &epsilon;.</b>
+</div>
+<div className="figure wide rv d2">
+<div className="apparatus" id="consoleMonitor">
+<div className="ap-head"><span>Fig. 4.1 &mdash; remap_confidence() decision surface</span><span className="live"><i></i>interactive</span></div>
+<DecisionSurface />
+</div>
+<figcaption data-fig="Fig. 4.1 &mdash; ">Interactive decision surface. P_HI is the scalpel &mdash; nudge it left and watch clean boxes begin to survive alongside poison.</figcaption>
+</div>
+</div>

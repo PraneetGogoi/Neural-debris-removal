@@ -1,0 +1,24 @@
+<div className="wrap">
+<div className="ch-run rv">Neural Debris Removal &mdash; Chapter IX</div>
+<div className="ch-head rv d1">
+<span className="ch-num">IX.</span>
+<h2 className="ch-title">Limitations &amp; future work</h2>
+</div>
+<div className="lede rv d2">
+      No forensic defense is complete. Four limitations bound the claims made in this thesis, and each points at a
+      natural next experiment.
+    </div>
+<ol className="findings rv d2">
+<li><span className="fn">9.1</span><div><b>No held-out leaderboard score.</b> The source notebook's cell outputs were stripped before this thesis was written, so every figure here is a measured <em>design target</em> &mdash; thresholds, weights, the poison-mass floor &mdash; rather than a final scored result on a hidden test set. The interactive apparatus in Chapter IV computes the real function; it does not simulate a score.</div></li>
+<li><span className="fn">9.2</span><div><b>The portability assumption is load-bearing.</b> The entire calibration strategy in Chapter V gates on whether the transplant probe fires above 0.50. A trigger that is portable only under narrow conditions &mdash; a specific background luminance, say &mdash; could pass the gate on a small sample and still mislead the remap in Chapter IV.</div></li>
+<li><span className="fn">9.3</span><div><b>The ensemble is diverse in seed, not in architecture.</b> All four unlearning runs (Chapter III, &sect;3.3) share a backbone and differ only in learning rate and seed. An adaptive attacker aware of this specific defense could plausibly craft a trigger that survives across seeds while still collapsing under a genuinely different architecture &mdash; an untested threat model.</div></li>
+<li><span className="fn">9.4</span><div><b>Single-class scope.</b> The detector carries one class, <em>streak</em>. Whether survival scoring and appearance fusion transfer to a multi-class detector &mdash; where a poisoned class could hide behind confusion with a legitimate neighboring class &mdash; is open.</div></li>
+</ol>
+<div className="prose rv d2">
+      The most direct extension is an adaptive-attacker study: retrain the backdoor against a defender who is
+      already running the Chapter III pipeline, and see whether the survival signal in Eq. 1 still collapses. A
+      second, cheaper extension is architectural diversity in the unlearning ensemble &mdash; swapping one committee
+      member's backbone rather than only its learning rate &mdash; which Chapter III's frozen-backbone design does not
+      currently permit without retraining from scratch.
+    </div>
+</div>

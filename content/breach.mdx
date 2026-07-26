@@ -1,0 +1,26 @@
+import ScatterCanvas from '../components/ui/visuals/ScatterCanvas';
+
+<div className="wrap">
+<div className="ch-run rv">Neural Debris Removal &mdash; Chapter I</div>
+<div className="ch-head rv d1">
+<span className="ch-num">I.</span>
+<h2 className="ch-title">The model <span className="r">lies</span> on command</h2>
+</div>
+<div className="lede rv d2">
+      A data-poisoning attack left a hidden trigger in the weights. Feed it the trigger and the detector fires on
+      <b>poison objects</b> &mdash; boxes that look, to the eye and to the confidence score, exactly like real satellite
+      trails. Three findings below rule out the obvious fixes.
+    </div>
+<ol className="findings rv d2">
+<li><span className="fn">1.1</span><div><b>Geometry doesn't separate it.</b> Plotting every candidate in log-width / log-height space (Fig. 1.1), the poison ground-truth lands inside the cloud of legitimate streaks. Shape carries no signal.</div></li>
+<li><span className="fn">1.2</span><div><b>Confidence doesn't separate it.</b> Poison boxes sit at the same score band as clean detections; a naive high-pass threshold discards real streaks in equal measure.</div></li>
+<li><span className="fn">1.3</span><div><b>Deletion is costly.</b> As shown in Chapter VI, the scoring function rewards preserving box geometry &mdash; the correct intervention is <em>demotion</em>, not removal.</div></li>
+</ol>
+<div className="with-note">
+<div className="figure">
+<div className="fig-panel"><ScatterCanvas height={440} width={560} /></div>
+<figcaption data-fig="Fig. 1.1 &mdash; "><b>Candidate distribution, log-geometry space.</b> Blue points are every box the poisoned model proposes on the test field; red crosses mark known poison ground-truth. The poison sits mid-distribution, indistinguishable from legitimate candidates by shape alone.</figcaption>
+</div>
+<aside className="sidenote"><span className="no">note</span>Spent the better part of a week engineering geometry features before running this plot. The distribution killed all of them in about ten seconds. The lesson stuck &mdash; look before you engineer.</aside>
+</div>
+</div>
