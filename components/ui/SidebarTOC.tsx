@@ -106,6 +106,22 @@ export function SidebarTOC() {
             <li style={{marginTop: '0.8rem', paddingTop: '0.8rem', borderTop: '1px solid var(--rule)'}}><a href="#appendix" data-target="appendix"><b>X.</b> Appendix</a></li>
           </ol>
         </div>
+        
+        {/* Progress Widget */}
+        <div id="sidebarProgressWidget" style={{
+          marginTop: '2rem',
+          paddingTop: '1rem',
+          borderTop: '1px solid var(--rule)',
+          fontFamily: 'var(--f-mono)',
+          fontSize: '0.64rem',
+          letterSpacing: '0.06em',
+          color: 'var(--text-faint)',
+          display: 'flex',
+          justifyContent: 'space-between'
+        }}>
+          <span id="sidebarProgressPct">0%</span>
+          <span id="sidebarProgressCh">· ch. I</span>
+        </div>
       </aside>
     </>
   );

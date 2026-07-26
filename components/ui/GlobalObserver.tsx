@@ -28,6 +28,18 @@ export default function GlobalObserver() {
             if (id && window.location.hash !== `#${id}`) {
               window.history.replaceState(null, '', `#${id}`);
             }
+            
+            // Update sidebar widget chapter name
+            const chName = document.getElementById("sidebarProgressCh");
+            if (chName) {
+              const map: Record<string, string> = {
+                'breach': 'ch. I', 'related': 'ch. II', 'pipeline': 'ch. III',
+                'console': 'ch. IV', 'transplant': 'ch. V', 'metric': 'ch. VI',
+                'spec': 'ch. VII', 'results': 'ch. VIII', 'limitations': 'ch. IX',
+                'appendix': 'appx.'
+              };
+              if (map[id]) chName.textContent = `· ${map[id]}`;
+            }
           }
         });
       }, { rootMargin: "-40% 0px -50% 0px", threshold: 0 });
@@ -43,13 +55,16 @@ export default function GlobalObserver() {
     // Reading progress bar & scrolled state
     const bar = document.getElementById("scrollProgress");
     const tocBar = document.getElementById("tocProgress");
+    const pctTxt = document.getElementById("sidebarProgressPct");
     
     const handleScroll = () => {
       const docH = document.documentElement.scrollHeight - window.innerHeight;
       const scrollP = docH > 0 ? (window.scrollY / docH) : 0;
       
-      if (bar) bar.style.width = Math.min(100, Math.max(0, scrollP * 100)) + "%";
+      const pct = Math.min(100, Math.max(0, Math.round(scrollP * 100)));
+      if (bar) bar.style.width = pct + "%";
       if (tocBar) tocBar.style.transform = `scaleY(${Math.min(1, Math.max(0, scrollP))})`;
+      if (pctTxt) pctTxt.textContent = `${pct}%`;
       
       if (window.scrollY > 80) {
         document.body.classList.add("scrolled");
