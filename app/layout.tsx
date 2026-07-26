@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Newsreader, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import 'katex/dist/katex.min.css';
 import GlobalObserver from "../components/ui/GlobalObserver";
 
 const newsreader = Newsreader({

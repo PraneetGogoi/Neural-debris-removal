@@ -25,6 +25,9 @@ export default function GlobalObserver() {
             const id = (e.target as HTMLElement).id;
             tabs.forEach(t => t.classList.toggle("active", t.dataset.target === id));
             tocLinks.forEach(t => t.classList.toggle("active", t.dataset.target === id));
+            if (id && window.location.hash !== `#${id}`) {
+              window.history.replaceState(null, '', `#${id}`);
+            }
           }
         });
       }, { rootMargin: "-40% 0px -50% 0px", threshold: 0 });

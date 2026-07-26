@@ -1,5 +1,7 @@
 import ExplorationIndex from '../components/ui/ExplorationIndex';
 
+import { KatexEquation } from '../components/ui/KatexEquation';
+
 <div className="wrap">
 <div className="ch-run rv">Neural Debris Removal &mdash; Chapter VI</div>
 <div className="ch-head rv d1">
@@ -12,7 +14,7 @@ import ExplorationIndex from '../components/ui/ExplorationIndex';
       poison box costs a tenth of being wrong about a genuine streak. The entire defense strategy in Chapter III is
       built around that single asymmetry.
     </div>
-<div className="eqn rv d2"><div className="eqn-body" id="eq4"></div><span className="eqn-no">(4)</span></div>
+<div className="eqn rv d2"><KatexEquation math="\text{cost}(b)=\begin{cases}\dfrac{1}{10}\,|c_{\text{pred}}-c_{\text{gt}}| & b\in\text{poison}\\[6pt]|c_{\text{pred}}-c_{\text{gt}}| & b\in\text{clean}\end{cases}" /><span className="eqn-no">(4)</span></div>
 <div className="asym rv d2">
 <div className="cell b"><div className="l">error, clean streak</div><div className="amt">&times;1.0</div><div className="d">Full price. Precious &mdash; don't touch what works.</div></div>
 <div className="cell a"><div className="l">error, poison box</div><div className="amt">&divide;10</div><div className="d">A_FACTOR = 10. Exactly why demote-to-&epsilon; outperforms delete.</div></div>
