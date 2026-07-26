@@ -64,7 +64,7 @@ section[id], .cover { scroll-margin-top: 4rem; }
 #scrollProgress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--poison), var(--survive)); z-index: 1001; width: 0%; transition: width .08s linear; }
 
 /* ================= topbar floating glass pill ================= */
-.topbar { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 1000; display: flex; align-items: center; gap: 1.4rem; width: min(94%, 1240px); padding: .6rem 1.2rem; background: var(--bg); border: 1px solid rgba(228, 228, 223, 0.10); border-radius: 999px; box-shadow: 0 14px 38px -12px rgba(0,0,0,.65); transition: all .35s var(--ease); }
+.topbar { position: fixed; top: 14px; left: 0; right: 0; margin-inline: auto; z-index: 9999; display: flex; align-items: center; gap: 1.4rem; width: min(94%, 1240px); padding: .6rem 1.2rem; background: var(--bg); border: 1px solid rgba(228, 228, 223, 0.10); border-radius: 999px; box-shadow: 0 14px 38px -12px rgba(0,0,0,.65); transition: all .35s var(--ease); backdrop-filter: none; -webkit-backdrop-filter: none; }
 .topbar:hover { border-color: rgba(228, 228, 223, 0.18); }
 .tb-mark { display: flex; align-items: center; gap: .55rem; font-family: var(--f-mono); font-size: .74rem; letter-spacing: .04em; color: var(--text-dim); white-space: nowrap; }
 .tb-mark b { color: var(--text); font-weight: 700; }
@@ -129,9 +129,23 @@ section[id], .cover { scroll-margin-top: 4rem; }
 .figure { max-width: 900px; margin: 1.2rem auto 0; }
 .figure.wide { max-width: 1040px; }
 .fig-panel { background: var(--panel); border: 1px solid var(--rule); padding: 1.1rem; position: relative; }
-figcaption { font-family: var(--f-mono); font-size: .72rem; color: var(--text-faint); line-height: 1.6; margin-top: .8rem; max-width: var(--measure); margin-inline: auto; padding-left: 1.4rem; position: relative; }
+figcaption {
+  font-family: var(--f-mono);
+  font-size: .72rem;
+  color: var(--text-faint);
+  line-height: 1.6;
+  margin-top: .8rem;
+  max-width: var(--measure);
+  margin-inline: auto;
+  display: flex;
+  gap: 0.5rem;
+}
 figcaption b { color: var(--text-dim); font-weight: 700; }
-figcaption::before { content: attr(data-fig); position: absolute; left: 0; top: 0; color: var(--text-dim); }
+figcaption::before {
+  content: attr(data-fig);
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
 
 /* ================= flowchart (pipeline diagram) ================= */
 .flowwrap { overflow-x: auto; padding-bottom: 1rem; margin-bottom: 0.5rem; }
