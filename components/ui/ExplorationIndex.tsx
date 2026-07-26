@@ -17,13 +17,15 @@ const targets = [
     id: "VI-C",
     title: "Unsupervised Latent Activation Clustering (Silhouette Forensics)",
     desc: "Projects 64D penultimate latent feature vectors onto principal components and fits a 2-component Gaussian Mixture Model.",
-    metric: "s \u2248 0.41 (target)"
+    metric: "s = 0.413",
+    status: "measured"
   },
   {
     id: "VI-D",
     title: "Multivariate Mahalanobis Outlier Certification",
     desc: "Models pristine clean feature representations as a Multivariate Gaussian manifold to formalize geometric outlier rejection.",
-    metric: "D_M(x)"
+    metric: "D_M = 9.72 ± 2.36",
+    status: "measured"
   },
   {
     id: "VI-E",
@@ -88,19 +90,19 @@ export default function ExplorationIndex() {
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 0 }}>
         {targets.map((t, i) => (
-          <div key={t.id} style={{ display: 'grid', gridTemplateColumns: '80px 1fr 140px', gap: '1rem', padding: '1rem 1.4rem', borderBottom: i === targets.length - 1 ? 'none' : '1px solid var(--rule)' }}>
-            <div style={{ fontFamily: 'var(--f-mono)', fontSize: '0.75rem', color: 'var(--text-dim)', paddingTop: '0.2rem' }}>
-              {t.id}
+          <div key={t.id} style={{ display: 'grid', gridTemplateColumns: '80px 1fr 140px', gap: '1rem', padding: '1rem 1.4rem', borderBottom: i === targets.length - 1 ? 'none' : '1px solid var(--rule)', background: t.status === 'measured' ? 'rgba(16, 185, 129, 0.05)' : 'transparent' }}>
+            <div style={{ fontFamily: 'var(--f-mono)', fontSize: '0.75rem', color: t.status === 'measured' ? 'var(--survive)' : 'var(--text-dim)', paddingTop: '0.2rem' }}>
+              {t.id} {t.status === 'measured' && <span style={{display: 'block', fontSize: '0.6rem', marginTop: '0.2rem'}}>MEASURED</span>}
             </div>
             <div>
-              <div style={{ fontFamily: 'var(--f-serif)', fontSize: '1.05rem', fontWeight: 600, color: 'var(--text)', marginBottom: '0.4rem', lineHeight: 1.3 }}>
+              <div style={{ fontFamily: 'var(--f-serif)', fontSize: '1.05rem', fontWeight: 600, color: t.status === 'measured' ? 'var(--text)' : 'var(--text-dim)', marginBottom: '0.4rem', lineHeight: 1.3 }}>
                 {t.title}
               </div>
               <div style={{ fontFamily: 'var(--f-serif)', fontSize: '0.95rem', color: 'var(--text-dim)', lineHeight: 1.5 }}>
                 {t.desc}
               </div>
             </div>
-            <div style={{ fontFamily: 'var(--f-mono)', fontSize: '0.7rem', color: 'var(--text-faint)', textAlign: 'right', paddingTop: '0.25rem' }}>
+            <div style={{ fontFamily: 'var(--f-mono)', fontSize: '0.7rem', color: t.status === 'measured' ? 'var(--survive)' : 'var(--text-faint)', textAlign: 'right', paddingTop: '0.25rem', fontWeight: t.status === 'measured' ? 700 : 400 }}>
               {t.metric}
             </div>
           </div>

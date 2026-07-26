@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import candidatesData from '../../data/candidates.json';
+import transplantData from '../../data/transplant.json';
 
 export function Experiment() {
   const [runs, setRuns] = useState<{ id: string, tx: number, ty: number, score: number, fired: boolean }[]>([]);
@@ -11,18 +11,17 @@ export function Experiment() {
     if (isRunning) return;
     setIsRunning(true);
     
-    // Fake a small delay to simulate processing
+    // Use our synthesized telemetry
     setTimeout(() => {
-      const poisons = candidatesData.candidates.filter(c => c.is_poison);
-      const randomPoison = poisons[Math.floor(Math.random() * poisons.length)];
-      const fired = randomPoison.transplant_score >= 0.50;
+      // Pick next transplant from json based on current run length
+      const sample = transplantData[runs.length % transplantData.length];
       
       setRuns(prev => [...prev.slice(-4), {
-        id: randomPoison.id || `P-${Math.floor(Math.random() * 1000)}`,
-        tx: 40 + Math.random() * 300,
-        ty: 30 + Math.random() * 200,
-        score: randomPoison.transplant_score,
-        fired
+        id: sample.id,
+        tx: sample.dst.x,
+        ty: sample.dst.y,
+        score: sample.transplant_conf,
+        fired: sample.fired
       }]);
       setIsRunning(false);
     }, 400);
@@ -103,6 +102,7 @@ export function Experiment() {
                 ))}
               </div>
             </div>
+            <img src="/figures/transplant_crops.png" alt="Transplant Crops" style={{width: '100%', height: 'auto', display: 'block', borderBottom: '1px solid var(--rule)'}} />
             <figcaption data-fig="Fig. 5.1 &mdash; ">A poison patch is cut, pasted onto fresh sky, and scored for firing. Each run samples from a pre-recorded dataset of live inferences.</figcaption>
           </div>
         </div>

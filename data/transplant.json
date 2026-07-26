@@ -1,0 +1,82 @@
+[
+  {
+    "id": "transplant_0",
+    "src": {
+      "x": 231,
+      "y": 213,
+      "w": 65,
+      "h": 12
+    },
+    "dst": {
+      "x": 603,
+      "y": 732
+    },
+    "fired": true,
+    "original_conf": 0.95,
+    "transplant_conf": 0.82
+  },
+  {
+    "id": "transplant_1",
+    "src": {
+      "x": 203,
+      "y": 238,
+      "w": 38,
+      "h": 15
+    },
+    "dst": {
+      "x": 577,
+      "y": 510
+    },
+    "fired": true,
+    "original_conf": 0.88,
+    "transplant_conf": 0.68
+  },
+  {
+    "id": "transplant_2",
+    "src": {
+      "x": 117,
+      "y": 115,
+      "w": 47,
+      "h": 10
+    },
+    "dst": {
+      "x": 510,
+      "y": 573
+    },
+    "fired": true,
+    "original_conf": 0.89,
+    "transplant_conf": 0.64
+  },
+  {
+    "id": "transplant_3",
+    "src": {
+      "x": 240,
+      "y": 236,
+      "w": 33,
+      "h": 12
+    },
+    "dst": {
+      "x": 799,
+      "y": 567
+    },
+    "fired": true,
+    "original_conf": 0.96,
+    "transplant_conf": 0.92
+  },
+  {
+    "id": "transplant_4",
+    "src": {
+      "x": 80,
+      "y": 169,
+      "w": 33,
+      "h": 15
+    },
+    "dst": {
+      "x": 741,
+      "y": 559
+    },
+    "fired": false,
+    "original_conf": 0.94,
+    "transplant_conf": 0.79
+  }
+]

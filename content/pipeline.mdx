@@ -99,6 +99,9 @@
 <span className="sn">3.5</span>
 <h3>Appearance CNN <span className="tg">&mdash; secondary signal, weight 0.20</span></h3>
 <div>A three-convolution network learns poison texture directly: positives are real poison crops, negatives are synthetic streaks drawn on clean backgrounds. It votes on whether a 64&times;64 crop looks planted or celestial.</div>
+<div style={{marginTop: '1rem', marginBottom: '1rem', border: '1px solid var(--rule)'}}>
+  <img src="/figures/poison_grid.png" alt="Poison Overlay Grid" style={{width: '100%', display: 'block'}} />
+</div>
 <div className="tagrow"><span className="tag">arch <b>16&rarr;32&rarr;64 &middot; GAP</b></span><span className="tag">crop <b>64px &middot; MAD-norm</b></span><span className="tag">train <b>400/class &middot; 15ep</b></span></div>
 </div>
 <div className="with-note">

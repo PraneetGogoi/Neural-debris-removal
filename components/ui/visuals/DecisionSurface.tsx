@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import candidatesData from '@/data/candidates.json';
 
 const PRESETS = {
   cons: { P_HI: 0.65, P_LO: 0.30, MIN_KEEP: 0.20, BOOST: false },
@@ -113,6 +114,30 @@ export default function DecisionSurface() {
     x.rotate(-Math.PI / 2);
     x.fillText("MIN_KEEP", 0, 0);
     x.restore();
+
+    // Plot real telemetry candidates
+    candidatesData.forEach(c => {
+      // Scale p_poison and survival_score to canvas coords
+      const px = sx(c.survival_score);
+      const py = (1 - c.p_poison) * H;
+      
+      x.beginPath();
+      x.arc(px, py, 2.5, 0, 2 * Math.PI);
+      
+      if (c.is_clean) {
+        // clean: typically high survival, low p_poison. Blueish.
+        x.fillStyle = 'rgba(76, 116, 160, 0.85)';
+        x.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+      } else {
+        // poison: high p_poison, low survival. Reddish.
+        x.fillStyle = 'rgba(225, 29, 72, 0.85)';
+        x.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+      }
+      
+      x.fill();
+      x.lineWidth = 0.5;
+      x.stroke();
+    });
 
   }, [pHi, pLo, minKeep, boost]);
 

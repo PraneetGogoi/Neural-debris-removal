@@ -1,7 +1,24 @@
 "use client";
 import React from 'react';
+import rocData from '@/data/roc_curve.json';
 
 export default function RocCurve() {
+  
+  // SVG dims
+  const W = 800;
+  const H = 450;
+  
+  // Transform FPR (x) and TPR (y) to SVG coordinates
+  // FPR goes 0 -> 1 mapped to 0 -> 800
+  // TPR goes 0 -> 1 mapped to 450 -> 0
+  
+  const points = rocData.fpr.map((fpr, i) => {
+    const tpr = rocData.tpr[i];
+    return `${fpr * W},${H - (tpr * H)}`;
+  });
+  
+  const pathD = `M 0,${H} L ` + points.join(' L ') + ` L ${W},0`;
+
   return (
     <div style={{ padding: '1rem', background: 'var(--panel)', border: '1px solid var(--rule)', marginTop: '2rem' }} className="rv d2">
       <div style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
@@ -43,7 +60,7 @@ export default function RocCurve() {
           {/* Random Guess Line */}
           <line x1="0" y1="450" x2="800" y2="0" stroke="var(--text-faint)" strokeWidth="1" strokeDasharray="4 4" />
 
-          {/* Baseline Curve (Poisoned) */}
+          {/* Baseline Curve (Poisoned - approx generic curve to show degradation) */}
           <path 
             d="M 0,450 Q 80,420 160,315 T 400,200 T 800,0" 
             fill="none" 
@@ -53,12 +70,13 @@ export default function RocCurve() {
             style={{ opacity: 0.8 }}
           />
           
-          {/* Tuned Curve (Defended) */}
+          {/* Tuned Curve (Defended - from synthesized data) */}
           <path 
-            d="M 0,450 C 0,450 16,180 80,45 C 160,0 400,0 800,0" 
+            d={pathD} 
             fill="none" 
             stroke="var(--survive)" 
             strokeWidth="4" 
+            strokeLinejoin="round"
           />
           
           {/* Operating Point */}
