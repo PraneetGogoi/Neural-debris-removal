@@ -1,6 +1,7 @@
 import { TopNav } from '@/components/ui/TopNav';
 import { SidebarTOC } from '@/components/ui/SidebarTOC';
 import { TldrCard } from '@/components/ui/TldrCard';
+import { SkyCanvas } from '@/components/ui/visuals/SkyCanvas';
 
 import { Breach } from '@/components/chapters/Breach';
 import { RelatedWork } from '@/components/chapters/RelatedWork';
@@ -28,7 +29,7 @@ export default function Home() {
 
           <div className="portholewrap">
             <div className="ring"></div>
-            <div className="porthole"><canvas id="skyCanvas"></canvas></div>
+            <div className="porthole"><SkyCanvas /></div>
           </div>
           <div className="figcap">Fig. 0 — Live detection field, channel OBS-7.02. Boxes lock onto streaks as the scan crosses them; poison is flagged in real time.</div>
 
