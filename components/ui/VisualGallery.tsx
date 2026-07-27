@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 
 const galleryImages = Array.from({ length: 8 }, (_, i) => ({
   id: i + 1,
@@ -26,7 +27,7 @@ export default function VisualGallery() {
               <span>Notebook Output</span>
               <span>#{img.id}</span>
             </div>
-            <img src={img.src} alt={`Notebook telemetry ${img.id}`} style={{ width: '100%', height: 'auto', border: '1px solid var(--rule-2)' }} loading="lazy" />
+            <Image src={img.src} alt={`Notebook telemetry ${img.id}`} width={1573} height={1305} style={{ width: '100%', height: 'auto', border: '1px solid var(--rule-2)' }} loading="lazy" />
           </div>
         ))}
       </div>

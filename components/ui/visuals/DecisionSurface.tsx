@@ -174,7 +174,7 @@ export default function DecisionSurface() {
     <div className="console-body">
       <div className="heat-wrap">
         <div className="heat-frame">
-          <canvas height={360} width={440} ref={canvasRef} id="heatCanvas"></canvas>
+          <canvas height={360} width={440} ref={canvasRef} id="heatCanvas" aria-label="Interactive decision surface diagram showing confidence remapping thresholds" role="img"></canvas>
           <div className="ax-y" id="axY">
             {[0, 0.25, 0.5, 0.75, 1].map(v => <span key={v}>{v.toFixed(2)}</span>)}
           </div>

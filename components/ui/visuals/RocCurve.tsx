@@ -38,7 +38,7 @@ export default function RocCurve() {
       </div>
       
       <div style={{ position: 'relative', width: '100%', aspectRatio: '16 / 9' }}>
-        <svg viewBox="0 0 800 450" style={{ width: '100%', height: '100%', display: 'block' }}>
+        <svg viewBox="0 0 800 450" style={{ width: '100%', height: '100%', display: 'block' }} aria-label="Receiver Operating Characteristic (ROC) Curve" role="img">
           {/* Grid */}
           {[0.2, 0.4, 0.6, 0.8].map(tick => (
             <g key={tick}>

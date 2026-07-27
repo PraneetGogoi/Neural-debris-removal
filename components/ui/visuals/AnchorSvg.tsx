@@ -7,7 +7,7 @@ export default function AnchorSvg() {
   const base = 62;
 
   return (
-    <svg id="anchorSvg" preserveAspectRatio="xMidYMid meet" viewBox="0 0 900 220">
+    <svg id="anchorSvg" preserveAspectRatio="xMidYMid meet" viewBox="0 0 900 220" aria-label="Diagram showing feature extraction and unlearning points" role="img">
       {ratios.map((r, i) => {
         const cx = slot * i + slot / 2;
         let w = base * Math.sqrt(r);

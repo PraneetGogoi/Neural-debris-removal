@@ -90,5 +90,5 @@ export default function ScatterCanvas({ width = 560, height = 440 }: { width?: n
     };
   }, []);
 
-  return <canvas ref={canvasRef} width={width} height={height} id="scatterCanvas" />;
+  return <canvas ref={canvasRef} width={width} height={height} id="scatterCanvas" aria-label="Scatter plot showing decision boundaries and confidence scores" role="img" />;
 }

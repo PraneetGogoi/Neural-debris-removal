@@ -9,14 +9,16 @@ const newsreader = Newsreader({
   subsets: ["latin"],
   variable: "--font-newsreader",
   weight: ["400", "500", "600", "700", "800"],
-  style: ["normal", "italic"]
+  style: ["normal", "italic"],
+  display: "swap"
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   variable: "--font-ibm",
   weight: ["400", "600"],
-  style: ["normal", "italic"]
+  style: ["normal", "italic"],
+  display: "swap"
 });
 
 export const metadata: Metadata = {

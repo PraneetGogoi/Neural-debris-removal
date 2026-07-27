@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import transplantData from '../../data/transplant.json';
 
 export function Experiment() {
@@ -81,7 +82,7 @@ export function Experiment() {
                 ))}
               </div>
             </div>
-            <img src="/figures/transplant_crops.png" alt="Transplant Crops" style={{width: '100%', height: 'auto', display: 'block', borderBottom: '1px solid var(--rule)'}} />
+            <Image src="/figures/transplant_crops.png" alt="Transplant Crops" width={1310} height={453} style={{width: '100%', height: 'auto', display: 'block', borderBottom: '1px solid var(--rule)'}} />
             <figcaption data-fig="Fig. 5.1 &mdash; ">A poison patch is cut, pasted onto fresh sky, and scored for firing. Each run samples from a pre-recorded dataset of live inferences.</figcaption>
           </div>
         </div>

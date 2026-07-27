@@ -254,5 +254,5 @@ export function SkyCanvas() {
     };
   }, []);
 
-  return <canvas id="skyCanvas" ref={canvasRef} style={{ width: '100%', height: '100%', display: 'block' }}></canvas>;
+  return <canvas ref={canvasRef} style={{ width: '100%', height: '100%', display: 'block' }} aria-label="Interactive simulation canvas showing live detection field" role="img"></canvas>;
 }

@@ -31,6 +31,7 @@ import { GlossaryTerm } from '../components/ui/GlossaryTerm';
 </div>
 <figcaption data-fig="Fig. 3.0 &mdash; ">Pipeline overview. Amber marks the diagnostic stage (&sect;3.2); red marks the intervention stage (&sect;3.6). Every other stage produces evidence consumed downstream.</figcaption>
 </div>
+<div className="table-responsive">
 <div className="notation rv d2">
 <div className="tcap">Table 3.1 &mdash; Notation used throughout Chapters III&ndash;VI</div>
 <div className="trow"><div className="sym">s</div><div className="def">raw confidence score output by the poisoned detector for a candidate box</div></div>
@@ -40,6 +41,7 @@ import { GlossaryTerm } from '../components/ui/GlossaryTerm';
 <div className="trow"><div className="sym">&epsilon;</div><div className="def">the demotion floor (0.01) a flagged box is remapped to, instead of 0</div></div>
 <div className="trow"><div className="sym"><GlossaryTerm id="iou">IoU</GlossaryTerm></div><div className="def">intersection-over-union, used for matching in survival scoring and in <GlossaryTerm id="macadd">maCADD</GlossaryTerm></div></div>
 <div className="trow"><div className="sym">A_FACTOR</div><div className="def">the &times;10 asymmetry discount applied to poison-box errors under maCADD (Chapter VI)</div></div>
+</div>
 </div>
 <div className="algo rv d2">
 <div className="acap">Algorithm 1 &mdash; Poison-aware submission pipeline</div>
@@ -74,12 +76,14 @@ import { GlossaryTerm } from '../components/ui/GlossaryTerm';
 <span className="sn">3.3</span>
 <h3>Unlearning ensemble <span className="tg">&mdash; classifier-only fine-tune</span></h3>
 <div>The model is fine-tuned on the unlearn set with <em>empty</em> labels, but with everything frozen except the classification head (<span className="im">cls_score</span>, <span className="im">cls_subnet</span>). The detector keeps its eyes; it forgets only what it was told to shout about. Four seeds and learning rates form a disagreement committee.</div>
+<div className="table-responsive">
 <div className="ens-table">
 <div className="er"><div>model</div><div>lr</div><div>iters &middot; seed</div></div>
 <div className="er"><div>ens &middot; A</div><div>3e-4</div><div>20 &middot; s42</div></div>
 <div className="er"><div>ens &middot; B</div><div>5e-4</div><div>20 &middot; s42</div></div>
 <div className="er"><div>ens &middot; C</div><div>5e-4</div><div>30 &middot; s7</div></div>
 <div className="er"><div>ens &middot; D</div><div>7e-4</div><div>15 &middot; s13</div></div>
+</div>
 </div>
 <div className="ens-frozen">frozen: <b>backbone &middot; FPN &middot; box regression &middot; anchors</b> &mdash; only classification logits move.</div>
 </div>

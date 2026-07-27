@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 export function SidebarTOC() {
   const [isOpen, setIsOpen] = useState(true);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   useEffect(() => {
     // No special scroll logic needed for closing the TOC anymore.
@@ -38,11 +39,15 @@ export function SidebarTOC() {
         &equiv; Contents
       </button>
 
-      <aside className={`toc-aside ${isOpen ? 'open' : 'closed'}`} id="tocAside">
+      <button className="fab-toc" onClick={() => setIsMobileOpen(!isMobileOpen)} aria-label="Table of Contents">
+        &equiv;
+      </button>
+
+      <aside className={`toc-aside ${isOpen ? 'open' : 'closed'} ${isMobileOpen ? 'mobile-open' : ''}`} id="tocAside">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '.9rem' }}>
           <div className="th" style={{ marginBottom: 0 }}>Contents</div>
           <button 
-            onClick={() => setIsOpen(false)}
+            onClick={() => { setIsOpen(false); setIsMobileOpen(false); }}
             className="toc-close-btn"
             style={{
               background: 'none', border: 'none', color: 'var(--text-faint)', 
