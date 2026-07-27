@@ -77,20 +77,30 @@ section[id], .cover { scroll-margin-top: 4rem; }
 
 /* ================= topbar floating glass pill ================= */
 .topbar { position: fixed; top: 14px; left: 0; right: 0; margin-inline: auto; z-index: 9999; display: flex; align-items: center; gap: 1.4rem; width: min(94%, 1240px); padding: .6rem 1.2rem; background: rgba(10, 11, 14, 0.85); border: 1px solid rgba(228, 228, 223, 0.10); border-bottom: 1px solid rgba(228, 228, 223, 0.18); border-radius: 999px; box-shadow: 0 14px 38px -12px rgba(0,0,0,.65); transition: all .35s var(--ease); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); overflow: hidden; }
+body.scrolled .topbar { padding: .4rem 1.2rem; }
 .topbar:hover { border-color: rgba(228, 228, 223, 0.18); }
 .tb-mark { display: flex; align-items: center; gap: .55rem; font-family: var(--f-mono); font-size: .74rem; letter-spacing: .04em; color: var(--text-dim); white-space: nowrap; }
-.tb-mark b { color: var(--text); font-weight: 700; }
+.tb-mark b { color: var(--text); font-weight: 700; border: 1px solid rgba(228, 228, 223, 0.3); padding: 0.2rem 0.4rem; border-radius: 4px; letter-spacing: 0.1em; margin-right: 0.3rem; }
 .tb-mark .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--survive); }
 .tb-links { display: flex; gap: .5rem; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
 .tb-links::-webkit-scrollbar { display: none; }
-.tb-links a { font-family: var(--f-mono); font-size: .67rem; letter-spacing: .03em; color: var(--text-faint); padding: .45rem .75rem; border-radius: 999px; border: 1px solid transparent; white-space: nowrap; transition: all .25s cubic-bezier(.16,1,.3,1); display: flex; align-items: center; gap: 0.35rem; }
+.tb-links a { position: relative; font-family: var(--f-mono); font-size: .67rem; letter-spacing: .03em; color: var(--text-faint); padding: .45rem .6rem; border-radius: 999px; border: 1px solid transparent; white-space: nowrap; transition: all .25s cubic-bezier(.16,1,.3,1); display: flex; align-items: center; gap: 0.35rem; }
 .tb-links a b { font-weight: normal; }
 .tb-links a::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--survive); opacity: 0; transform: scale(0.5); transition: all 0.3s var(--ease); }
 .tb-links a.active::before { opacity: 1; transform: scale(1); box-shadow: 0 0 6px var(--survive); }
-.tb-links a:hover { color: var(--text); background: rgba(255,255,255,.05); transform: translateY(-1px); }
-.tb-links a.active { color: var(--survive); background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.25); font-weight: 600; }
+.tb-links a::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 0%; height: 2px; background: var(--survive); transition: width 200ms ease-out; border-radius: 2px; }
+.tb-links a:hover::after { width: calc(100% - 1.2rem); }
+.tb-links a:hover { color: var(--text); }
+.tb-links a.active { color: var(--text); background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.15); }
+.tb-links a.active b { font-weight: 700; color: var(--survive); }
 body.scrolled .tb-links a .nav-text { display: none; }
 body.scrolled .tb-links a:hover .nav-text { display: inline; }
+
+.tb-div { width: 1px; height: 14px; background: var(--rule); margin-inline: 0.2rem; }
+
+/* ================= glossary in-text triggers ================= */
+.term-trigger { border-bottom: 1px dotted var(--text-dim); cursor: help; color: var(--text); font-family: var(--f-mono); font-size: 0.9em; transition: color 0.2s, border-color 0.2s; }
+.term-trigger:hover { color: var(--survive); border-color: var(--survive); }
 
 /* ================= sticky sidebar TOC ================= */
 .toc-aside { position: fixed; top: 5.4rem; left: calc(50% - 660px); width: 190px; z-index: 500; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s var(--ease); }

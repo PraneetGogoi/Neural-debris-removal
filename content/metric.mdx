@@ -1,6 +1,7 @@
 import ExplorationIndex from '../components/ui/ExplorationIndex';
 
 import { KatexEquation } from '../components/ui/KatexEquation';
+import { GlossaryTerm } from '../components/ui/GlossaryTerm';
 
 <div className="wrap">
 <div className="ch-run rv">Neural Debris Removal &mdash; Chapter VI</div>
@@ -9,7 +10,7 @@ import { KatexEquation } from '../components/ui/KatexEquation';
 <h2 className="ch-title">On scoring &mdash; a metric that forgives poison</h2>
 </div>
 <div className="prose rv d2">
-      maCADD matches submitted boxes to a clean model's using Hungarian assignment across IoU thresholds 0.2 through
+      <GlossaryTerm id="macadd">maCADD</GlossaryTerm> matches submitted boxes to a clean model's using Hungarian assignment across <GlossaryTerm id="iou">IoU</GlossaryTerm> thresholds 0.2 through
       0.9, then sums the confidence gaps. Critically, the penalty is <b>asymmetric</b> (Eq. 4): being wrong about a
       poison box costs a tenth of being wrong about a genuine streak. The entire defense strategy in Chapter III is
       built around that single asymmetry.
@@ -17,7 +18,7 @@ import { KatexEquation } from '../components/ui/KatexEquation';
 <div className="eqn rv d2"><KatexEquation math="\text{cost}(b)=\begin{cases}\dfrac{1}{10}\,|c_{\text{pred}}-c_{\text{gt}}| & b\in\text{poison}\\[6pt]|c_{\text{pred}}-c_{\text{gt}}| & b\in\text{clean}\end{cases}" /><span className="eqn-no">(4)</span></div>
 <div className="asym rv d2">
 <div className="cell b"><div className="l">error, clean streak</div><div className="amt">&times;1.0</div><div className="d">Full price. Precious &mdash; don't touch what works.</div></div>
-<div className="cell a"><div className="l">error, poison box</div><div className="amt">&divide;10</div><div className="d">A_FACTOR = 10. Exactly why demote-to-&epsilon; outperforms delete.</div></div>
+<div className="cell a"><div className="l">error, poison box</div><div className="amt">&divide;10</div><div className="d"><GlossaryTerm id="a_factor">A_FACTOR</GlossaryTerm> = 10. Exactly why demote-to-<GlossaryTerm id="epsilon">&epsilon;</GlossaryTerm> outperforms delete.</div></div>
 </div>
 <div className="with-note rv d2" style={{marginTop: '1.8rem', marginBottom: '1.6rem', padding: '1.2rem', background: 'var(--panel)', border: '1px solid var(--rule)', borderLeft: '3px solid var(--amber)', maxWidth: 'var(--measure)', marginInline: 'auto'}}>
 <div className="prose" style={{marginTop: 0, color: 'var(--text)'}}>

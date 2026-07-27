@@ -1,4 +1,5 @@
 import { KatexEquation } from '../components/ui/KatexEquation';
+import { GlossaryTerm } from '../components/ui/GlossaryTerm';
 
 <div className="wrap">
 <div className="ch-run rv">Neural Debris Removal &mdash; Chapter III</div>
@@ -33,11 +34,11 @@ import { KatexEquation } from '../components/ui/KatexEquation';
 <div className="notation rv d2">
 <div className="tcap">Table 3.1 &mdash; Notation used throughout Chapters III&ndash;VI</div>
 <div className="trow"><div className="sym">s</div><div className="def">raw confidence score output by the poisoned detector for a candidate box</div></div>
-<div className="trow"><div className="sym">p_poison</div><div className="def">fused poison probability for a candidate, in [0, 1]</div></div>
+<div className="trow"><div className="sym"><GlossaryTerm id="p_poison">p_poison</GlossaryTerm></div><div className="def">fused poison probability for a candidate, in [0, 1]</div></div>
 <div className="trow"><div className="sym">P_HI, P_LO</div><div className="def">upper / lower thresholds on p_poison bounding the remap ramp</div></div>
-<div className="trow"><div className="sym">MIN_KEEP</div><div className="def">score floor below which a candidate is dropped outright</div></div>
+<div className="trow"><div className="sym"><GlossaryTerm id="min_keep">MIN_KEEP</GlossaryTerm></div><div className="def">score floor below which a candidate is dropped outright</div></div>
 <div className="trow"><div className="sym">&epsilon;</div><div className="def">the demotion floor (0.01) a flagged box is remapped to, instead of 0</div></div>
-<div className="trow"><div className="sym">IoU</div><div className="def">intersection-over-union, used for matching in survival scoring and in maCADD</div></div>
+<div className="trow"><div className="sym"><GlossaryTerm id="iou">IoU</GlossaryTerm></div><div className="def">intersection-over-union, used for matching in survival scoring and in <GlossaryTerm id="macadd">maCADD</GlossaryTerm></div></div>
 <div className="trow"><div className="sym">A_FACTOR</div><div className="def">the &times;10 asymmetry discount applied to poison-box errors under maCADD (Chapter VI)</div></div>
 </div>
 <div className="algo rv d2">
@@ -51,7 +52,7 @@ import { KatexEquation } from '../components/ui/KatexEquation';
 <li>for c in C:</li>
 <li className="indent">signal_surv(c) &larr; 1 &minus; mean(E(c)) / D(c) <span style={{color: 'var(--text-faint)'}}>// &sect;3.4, Eq. 1</span></li>
 <li className="indent">signal_app(c) &larr; TinyCNN(crop(c)) <span style={{color: 'var(--text-faint)'}}>// &sect;3.5</span></li>
-<li className="indent">p_poison(c) &larr; fuse(signal_surv, signal_app, signal_geo) <span style={{color: 'var(--text-faint)'}}>// Eq. 2</span></li>
+<li className="indent"><GlossaryTerm id="p_poison">p_poison(c)</GlossaryTerm> &larr; fuse(signal_surv, signal_app, signal_geo) <span style={{color: 'var(--text-faint)'}}>// Eq. 2</span></li>
 <li className="indent">conf'(c) &larr; remap(c.s, p_poison(c)) <span style={{color: 'var(--text-faint)'}}>// &sect;3.6, Eq. 3</span></li>
 <li><b>return</b> argmin over \{conservative, aggressive, tuned\} of surrogate-maCADD <span style={{color: 'var(--text-faint)'}}>// &sect;3.7</span></li>
 </ol>
@@ -110,12 +111,12 @@ import { KatexEquation } from '../components/ui/KatexEquation';
 <div className="subsec" style={{margin: 0}}>
 <span className="sn">3.6</span>
 <h3>Confidence remap <span className="tg">&mdash; the guidance program</span></h3>
-<div>The three signals fuse into <span className="im r">p_poison</span> (Eq. 2). High p_poison on a strong box is <em>demoted to &epsilon;</em> rather than deleted; low p_poison is trusted as-is; the region between ramps down; noise-floor boxes are dropped outright (Eq. 3). This surface is built as an interactive apparatus in Chapter IV.</div>
+<div>The three signals fuse into <span className="im r"><GlossaryTerm id="p_poison">p_poison</GlossaryTerm></span> (Eq. 2). High <GlossaryTerm id="p_poison">p_poison</GlossaryTerm> on a strong box is <em>demoted to <GlossaryTerm id="epsilon">&epsilon;</GlossaryTerm></em> rather than deleted; low <GlossaryTerm id="p_poison">p_poison</GlossaryTerm> is trusted as-is; the region between ramps down; noise-floor boxes are dropped outright (Eq. 3). This surface is built as an interactive apparatus in Chapter IV.</div>
 <div className="eqn"><KatexEquation math="p_{poison}(c) = \sigma(W_s \cdot signal_{surv} + W_a \cdot signal_{app} + W_g \cdot signal_{geo})" /><span className="eqn-no">(2)</span></div>
 <div className="eqn"><KatexEquation math="conf'(c) = \begin{cases} \epsilon, & \text{if } p_{poison} \ge P_{HI} \\ c.s, & \text{if } p_{poison} \le P_{LO} \\ drop, & \text{if } c.s < MIN\_KEEP \\ \text{interpolate}, & \text{otherwise} \end{cases}" /><span className="eqn-no">(3)</span></div>
-<div className="tagrow"><span className="tag">P_HI <b>flag &rarr; &epsilon;</b></span><span className="tag">P_LO <b>trust</b></span><span className="tag">MIN_KEEP <b>drop noise</b></span><span className="tag">&epsilon; <b>0.01</b></span></div>
+<div className="tagrow"><span className="tag">P_HI <b>flag &rarr; <GlossaryTerm id="epsilon">&epsilon;</GlossaryTerm></b></span><span className="tag">P_LO <b>trust</b></span><span className="tag"><GlossaryTerm id="min_keep">MIN_KEEP</GlossaryTerm> <b>drop noise</b></span><span className="tag"><GlossaryTerm id="epsilon">&epsilon;</GlossaryTerm> <b>0.01</b></span></div>
 </div>
-<aside className="sidenote"><span className="no">note</span>Deleting flagged boxes felt satisfying and scored terribly. Demoting to &epsilon; preserves the box geometry the metric secretly rewards &mdash; the hardest lesson of this thesis.</aside>
+<aside className="sidenote"><span className="no">note</span>Deleting flagged boxes felt satisfying and scored terribly. Demoting to <GlossaryTerm id="epsilon">&epsilon;</GlossaryTerm> preserves the box geometry the metric secretly rewards &mdash; the hardest lesson of this thesis.</aside>
 </div>
 <div className="subsec rv">
 <span className="sn">3.7</span>
