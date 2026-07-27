@@ -115,5 +115,19 @@ export default function GlobalObserver() {
     };
   }, [pathname]);
 
+  useEffect(() => {
+    // Deep linking for glossary terms (#glossary=p_poison)
+    const hash = window.location.hash;
+    if (hash.startsWith('#glossary=')) {
+      const termId = hash.replace('#glossary=', '');
+      if (termId) {
+        // slight delay to ensure glossary component is mounted and listening
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('open-glossary', { detail: { term: termId } }));
+        }, 500);
+      }
+    }
+  }, [pathname]);
+
   return null;
 }
