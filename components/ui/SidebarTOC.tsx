@@ -66,10 +66,10 @@ export function SidebarTOC() {
           }}></div>
           
           <ol style={{ position: 'relative', zIndex: 2, borderLeft: '1px solid var(--rule)' }}>
-            <li><a href="#breach" data-target="breach"><b>I.</b> The Breach</a></li>
-            <li><a href="#related" data-target="related"><b>II.</b> Related Work</a></li>
+            <li><a href="#breach" data-target="breach"><span className="c-dot" style={{ background: 'var(--survive)' }} title="Measured"></span><b>I.</b> The Breach</a></li>
+            <li><a href="#related" data-target="related"><span className="c-dot" style={{ background: 'var(--survive)' }} title="Measured"></span><b>II.</b> Related Work</a></li>
             <li className="has-sub">
-              <a href="#pipeline" data-target="pipeline"><b>III.</b> Methodology</a>
+              <a href="#pipeline" data-target="pipeline"><span className="c-dot" style={{ background: 'var(--survive)' }} title="Measured"></span><b>III.</b> Methodology</a>
               <ul className="sub-toc">
                 <li><a href="#pipeline" data-target="pipeline"><b>3.1</b> The Premise</a></li>
                 <li><a href="#pipeline" data-target="pipeline"><b>3.2</b> Detection Base</a></li>
@@ -77,10 +77,10 @@ export function SidebarTOC() {
                 <li><a href="#pipeline" data-target="pipeline"><b>3.4</b> Confidence Remap</a></li>
               </ul>
             </li>
-            <li><a href="#console" data-target="console"><b>IV.</b> Apparatus</a></li>
-            <li><a href="#transplant" data-target="transplant"><b>V.</b> Experiment</a></li>
+            <li><a href="#console" data-target="console"><span className="c-dot" style={{ background: 'var(--survive)' }} title="Measured"></span><b>IV.</b> Apparatus</a></li>
+            <li><a href="#transplant" data-target="transplant"><span className="c-dot" style={{ background: 'var(--survive)' }} title="Measured"></span><b>V.</b> Experiment</a></li>
             <li className="has-sub">
-              <a href="#metric" data-target="metric"><b>VI.</b> On Scoring</a>
+              <a href="#metric" data-target="metric"><span className="c-dot" style={{ background: 'var(--amber)' }} title="Target (Not Benchmarked)"></span><b>VI.</b> On Scoring</a>
               <ul className="sub-toc">
                 <li><a href="#metric" data-target="metric"><b>VI-A</b> Spectral</a></li>
                 <li><a href="#metric" data-target="metric"><b>VI-B</b> Epistemic</a></li>
@@ -90,11 +90,29 @@ export function SidebarTOC() {
                 <li><a href="#metric" data-target="metric"><b>VI-L</b> Conformal</a></li>
               </ul>
             </li>
-            <li><a href="#spec" data-target="spec"><b>VII.</b> Specification</a></li>
-            <li><a href="#results" data-target="results"><b>VIII.</b> Results</a></li>
-            <li><a href="#limitations" data-target="limitations"><b>IX.</b> Limitations</a></li>
-            <li style={{marginTop: '0.8rem', paddingTop: '0.8rem', borderTop: '1px solid var(--rule)'}}><a href="#appendix" data-target="appendix"><b>X.</b> Appendix</a></li>
+            <li><a href="#spec" data-target="spec"><span className="c-dot" style={{ background: 'var(--amber)' }} title="Target (Not Benchmarked)"></span><b>VII.</b> Specification</a></li>
+            <li><a href="#results" data-target="results"><span className="c-dot" style={{ background: 'var(--amber)' }} title="Target (Not Benchmarked)"></span><b>VIII.</b> Results</a></li>
+            <li><a href="#limitations" data-target="limitations"><span className="c-dot" style={{ background: 'var(--amber)' }} title="Target (Not Benchmarked)"></span><b>IX.</b> Limitations</a></li>
+            <li style={{marginTop: '0.8rem', paddingTop: '0.8rem', borderTop: '1px solid var(--rule)'}}><a href="#appendix" data-target="appendix"><span className="c-dot" style={{ background: 'var(--amber)' }} title="Target (Not Benchmarked)"></span><b>X.</b> Appendix</a></li>
           </ol>
+        </div>
+        
+        {/* Confidence Legend */}
+        <div style={{
+          marginTop: '1.5rem',
+          display: 'flex',
+          gap: '1rem',
+          fontFamily: 'var(--f-mono)',
+          fontSize: '0.6rem',
+          color: 'var(--text-faint)',
+          letterSpacing: '0.05em'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--survive)' }}></span> measured
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--amber)' }}></span> target
+          </div>
         </div>
         
         {/* Progress Widget */}

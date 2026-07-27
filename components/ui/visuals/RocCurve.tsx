@@ -81,7 +81,7 @@ export default function RocCurve() {
           
           {/* Operating Point */}
           <circle cx="80" cy="45" r="5" fill="none" stroke="var(--survive)" strokeWidth="1" strokeDasharray="2 2" />
-          <text x="95" y="50" fill="var(--text-faint)" fontSize="11" fontFamily="var(--f-mono)">Operating Pt Target (TPR: 0.98, FPR: 0.05)</text>
+          <text x="95" y="50" fill="var(--text-faint)" fontSize="11" fontFamily="var(--f-mono)">Target (Not Benchmarked) (TPR: 0.98, FPR: 0.05)</text>
 
         </svg>
       </div>

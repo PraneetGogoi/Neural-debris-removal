@@ -56,8 +56,8 @@ section[id], .cover { scroll-margin-top: 4rem; }
 .accent-t { color: var(--survive); }
 
 /* ================= variants grid (results) ================= */
-.variants { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); max-width: 1040px; margin: 1.2rem auto 0; }
-@media(max-width:820px) { .variants { grid-template-columns: 1fr !important; } }
+.variants { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); max-width: 1040px; margin: 1.2rem auto 0; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+@media(max-width:820px) { .variants { grid-template-columns: 1fr; } }
 .vcell { background: var(--panel); padding: 1.2rem 1.3rem; border: 1px solid transparent; }
 .vcell.win { background: var(--panel-2); }
 .vcell .vh { display: flex; justify-content: space-between; align-items: center; margin-bottom: .8rem; border-bottom: 1px solid var(--rule); padding-bottom: .55rem; }
@@ -126,7 +126,7 @@ body.scrolled .tb-links a:hover .nav-text { display: inline; }
 
 .toc-close-btn { opacity: 1; pointer-events: auto; transition: color 0.3s var(--ease); }
 .toc-close-btn:hover { color: var(--text); }
-@media(max-width:1400px) { .toc-aside, .toc-toggle { display: none !important; } }
+@media(max-width:1440px) { .toc-aside, .toc-toggle { display: none !important; } }
 
 /* ================= COVER ================= */
 .cover { position: relative; padding-top: clamp(4.5rem, 9vw, 6.5rem); padding-bottom: clamp(1.8rem, 3.5vw, 2.8rem); text-align: center; }
@@ -191,8 +191,8 @@ figcaption::before {
 }
 
 /* ================= flowchart (pipeline diagram) ================= */
-.flowwrap { overflow-x: auto; padding-bottom: 1rem; margin-bottom: 0.5rem; }
-.flowchart { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; min-width: max-content; }
+.flowwrap { overflow-x: auto; padding-bottom: 1rem; margin-bottom: 0.5rem; max-width: 100%; }
+.flowchart { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; min-width: max-content; padding-inline: 1px; }
 .fnode { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
 .fnode .fi { font-family: var(--f-mono); font-size: 0.7rem; color: var(--text-faint); padding: 0.2rem 0.6rem; border: 1px solid var(--rule); border-radius: 99px; background: var(--panel-2); }
 .fnode .ft { font-family: var(--f-mono); font-size: 0.65rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-dim); }

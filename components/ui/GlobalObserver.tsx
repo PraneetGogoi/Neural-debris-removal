@@ -129,5 +129,52 @@ export default function GlobalObserver() {
     }
   }, [pathname]);
 
+  useEffect(() => {
+    // Keyboard navigation (j/k or ArrowDown/ArrowUp) to jump between chapters
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore if typing in an input (like the glossary search)
+      if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') return;
+      
+      if (e.key === 'j' || e.key === 'ArrowDown' || e.key === 'k' || e.key === 'ArrowUp') {
+        const chapters = Array.from(document.querySelectorAll('.chapter, .cover'));
+        if (!chapters.length) return;
+        
+        // Find current active or nearest chapter
+        const scrollY = window.scrollY + 100; // offset for nav
+        let currentIndex = -1;
+        
+        for (let i = 0; i < chapters.length; i++) {
+          const rect = chapters[i].getBoundingClientRect();
+          const offsetTop = rect.top + window.scrollY;
+          if (offsetTop > scrollY) {
+            currentIndex = i - 1;
+            break;
+          }
+        }
+        
+        if (currentIndex === -1) {
+          // If we are at the very bottom or last chapter
+          currentIndex = chapters.length - 1;
+        }
+
+        let nextIndex = currentIndex;
+        if (e.key === 'j' || e.key === 'ArrowDown') {
+          nextIndex = Math.min(currentIndex + 1, chapters.length - 1);
+        } else {
+          nextIndex = Math.max(currentIndex - 1, 0);
+        }
+        
+        if (nextIndex !== currentIndex && chapters[nextIndex]) {
+          e.preventDefault();
+          const targetY = chapters[nextIndex].getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top: targetY, behavior: 'smooth' });
+        }
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return null;
 }

@@ -8,7 +8,7 @@ import VisualGallery from '../components/ui/VisualGallery';
 <h2 className="ch-title">Results &amp; discussion &mdash; three scalpels, one <em>promoted</em></h2>
 </div>
 <div className="lede rv d2">Each variant is measured on poison-mass (unlearn set) and a surrogate maCADD; the pipeline auto-copies the winner to <span className="im">submission.csv</span>.</div>
-<div className="variants rv d2" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+<div className="variants rv d2">
 <div className="vcell" style={{ opacity: 0.7, borderStyle: 'dashed' }}>
 <div className="vh"><span className="nm">No Defense</span><span className="badge" style={{background: 'var(--poison)', color: 'var(--bg)'}}>raw</span></div>
 <div className="row"><span>P_HI</span><b>&mdash;</b></div><div className="row"><span>P_LO</span><b>&mdash;</b></div>
@@ -42,7 +42,8 @@ import VisualGallery from '../components/ui/VisualGallery';
 
 <VisualGallery />
 
-<div className="footnote-final rv d2">
-      Metrics and telemetry reflect empirical evaluations conducted via the <b>debris.ipynb</b> forensic notebook environment. Final leaderboard ranking remains dependent on the hidden evaluation set.
-    </div>
+<div className="footnote-final rv d2" style={{ padding: '1.2rem', border: '1px solid var(--amber)', background: 'rgba(225,29,72,0.05)', color: 'var(--amber)', marginTop: '2rem', fontSize: '0.9rem', fontFamily: 'var(--f-serif)' }}>
+  <b style={{ fontFamily: 'var(--f-mono)', letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: '0.75rem', display: 'block', marginBottom: '0.4rem' }}>Note on Execution</b>
+  All thresholds, parameters, and results described in this document are illustrative design targets migrated from the <code>debris.ipynb</code> forensic pipeline, and have not yet been empirically measured against the final evaluation set.
+</div>
 </div>

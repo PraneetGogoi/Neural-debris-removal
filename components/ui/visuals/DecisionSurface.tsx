@@ -225,7 +225,8 @@ export default function DecisionSurface() {
           </label>
         </div>
         
-        <div className="presets">
+        <div className="presets" style={{ marginTop: '0.8rem' }}>
+          <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: 'var(--text-faint)', letterSpacing: '0.05em', marginBottom: '0.4rem', fontFamily: 'var(--f-mono)' }}>Compare Chapter VIII Variants</div>
           <button className={`preset ${isPreset(PRESETS.cons) ? 'on' : ''}`} onClick={() => {
             setPHi(PRESETS.cons.P_HI); setPLo(PRESETS.cons.P_LO); setMinKeep(PRESETS.cons.MIN_KEEP); setBoost(PRESETS.cons.BOOST);
           }}>Conservative</button>

@@ -89,7 +89,7 @@ import { GlossaryTerm } from '../components/ui/GlossaryTerm';
 <span className="sn">3.4</span>
 <h3>Survival scoring <span className="tg">&mdash; primary signal, weight 0.75</span></h3>
 <div>For each candidate: how much confidence <em>survived</em> unlearning? Real streaks keep firing across the ensemble; poison confidence collapses, since collapsing it was the point. Low survival implies high poison probability.</div>
-<div className="eqn"><KatexEquation math="signal_{surv}(c) = 1 - \frac{\mu(E(c))}{D(c)}" /><span className="eqn-no">(1)</span></div>
+<div className="eqn"><KatexEquation math="signal_{surv}(c) = 1 - \\frac{\\mu(E(c))}{D(c)}" /><span className="eqn-no">(1)</span></div>
 <div className="surv">
 <div className="row clean"><span>clean box</span><span className="track"><span className="fill" style={{width: '88%'}}></span></span><span className="val">0.88</span></div>
 <div className="row clean"><span>clean box</span><span className="track"><span className="fill" style={{width: '79%'}}></span></span><span className="val">0.79</span></div>
@@ -112,8 +112,8 @@ import { GlossaryTerm } from '../components/ui/GlossaryTerm';
 <span className="sn">3.6</span>
 <h3>Confidence remap <span className="tg">&mdash; the guidance program</span></h3>
 <div>The three signals fuse into <span className="im r"><GlossaryTerm id="p_poison">p_poison</GlossaryTerm></span> (Eq. 2). High <GlossaryTerm id="p_poison">p_poison</GlossaryTerm> on a strong box is <em>demoted to <GlossaryTerm id="epsilon">&epsilon;</GlossaryTerm></em> rather than deleted; low <GlossaryTerm id="p_poison">p_poison</GlossaryTerm> is trusted as-is; the region between ramps down; noise-floor boxes are dropped outright (Eq. 3). This surface is built as an interactive apparatus in Chapter IV.</div>
-<div className="eqn"><KatexEquation math="p_{poison}(c) = \sigma(W_s \cdot signal_{surv} + W_a \cdot signal_{app} + W_g \cdot signal_{geo})" /><span className="eqn-no">(2)</span></div>
-<div className="eqn"><KatexEquation math="conf'(c) = \begin{cases} \epsilon, & \text{if } p_{poison} \ge P_{HI} \\ c.s, & \text{if } p_{poison} \le P_{LO} \\ drop, & \text{if } c.s < MIN\_KEEP \\ \text{interpolate}, & \text{otherwise} \end{cases}" /><span className="eqn-no">(3)</span></div>
+<div className="eqn"><KatexEquation math="p_{poison}(c) = \\sigma(W_s \\cdot signal_{surv} + W_a \\cdot signal_{app} + W_g \\cdot signal_{geo})" /><span className="eqn-no">(2)</span></div>
+<div className="eqn"><KatexEquation math="conf'(c) = \\begin{cases} \\epsilon, & \\text{if } p_{poison} \\ge P_{HI} \\\\ c.s, & \\text{if } p_{poison} \\le P_{LO} \\\\ drop, & \\text{if } c.s < MIN\\_KEEP \\\\ \\text{interpolate}, & \\text{otherwise} \\end{cases}" /><span className="eqn-no">(3)</span></div>
 <div className="tagrow"><span className="tag">P_HI <b>flag &rarr; <GlossaryTerm id="epsilon">&epsilon;</GlossaryTerm></b></span><span className="tag">P_LO <b>trust</b></span><span className="tag"><GlossaryTerm id="min_keep">MIN_KEEP</GlossaryTerm> <b>drop noise</b></span><span className="tag"><GlossaryTerm id="epsilon">&epsilon;</GlossaryTerm> <b>0.01</b></span></div>
 </div>
 <aside className="sidenote"><span className="no">note</span>Deleting flagged boxes felt satisfying and scored terribly. Demoting to <GlossaryTerm id="epsilon">&epsilon;</GlossaryTerm> preserves the box geometry the metric secretly rewards &mdash; the hardest lesson of this thesis.</aside>
