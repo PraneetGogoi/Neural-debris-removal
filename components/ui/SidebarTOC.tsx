@@ -6,18 +6,8 @@ export function SidebarTOC() {
   const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
-    // Instead of auto-collapsing on scroll, let's keep it open until user toggles,
-    // or just let CSS handle it. The user said: "collapse into a small '≡ Contents' toggle after the reader scrolls past the hero".
-    const onScroll = () => {
-      if (window.scrollY > window.innerHeight * 0.8) {
-        document.body.classList.add("toc-can-collapse");
-      } else {
-        document.body.classList.remove("toc-can-collapse");
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    // No special scroll logic needed for closing the TOC anymore.
+    // The close button will always be visible.
   }, []);
 
   return (

@@ -111,8 +111,8 @@ body.scrolled .tb-links a:hover .nav-text { display: inline; }
 .sub-toc a b { font-size: 0.72rem; }
 .sub-toc a:hover, .sub-toc a.active { color: var(--text-dim); }
 
-.toc-close-btn { opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-body.toc-can-collapse .toc-close-btn { opacity: 1; pointer-events: auto; }
+.toc-close-btn { opacity: 1; pointer-events: auto; transition: color 0.3s var(--ease); }
+.toc-close-btn:hover { color: var(--text); }
 @media(max-width:1400px) { .toc-aside, .toc-toggle { display: none !important; } }
 
 /* ================= COVER ================= */
